@@ -23,8 +23,6 @@ the clever part:  .apply(lambda x: ...)
 states['coords'] = states['geometry'].apply(
         lambda x: x.representative_point().coords[:])
 
-
-
 The coordinates are like [(x,y)]
 
 
