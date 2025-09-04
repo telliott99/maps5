@@ -1,0 +1,205 @@
+TL;DR
+trying to keep my Dropbox lean, I have separate copies of data files on DAVE and the MINI in
+~/Programming/data
+
+This turned out to be a bad idea.  I have run into all kinds of inconsistencies stemming from this.
+
+Ultimately I used
+dbpath = '/Users/telliott/Library/CloudStorage/Dropbox/data/'
+
+=====
+
+boundaries
+
+geographic boundaries for the US
+
+https://www.census.gov/geographies/mapping-files/2010/geo/carto-boundary-file.html
+
+https://eric.clst.org/tech/usgeojson/
+
+for example us states
+gz_2010_us_040_00_5m.zip
+
+We're playing golf:
+500k, 5m, 20m resolutions
+500k are highest res, 20m smallest
+
+A few years ago, I constructed a shapefile with only
+Western states.  It's only about 100 kb.
+fn = 'western_states.shp.zip'
+
+Put that in dbpath
+works fine
+
+gdf = gpd.read_file(path+fn)
+gdf['NAME']
+
+=====
+
+continental divide
+
+https://gis-fws.opendata.arcgis.com/datasets/fws::continental-divide-pacific-atlantic/explore?location=22.743468%2C54.548500%2C1.73
+
+Continental_Divide-Pacific_Atlantic.zip
+
+=====
+
+rivers and lakes
+
+I came across some files on weather.gov and noaa.gov
+
+https://www.weather.gov/gis/Rivers
+https://www.weather.gov/source/gis/Shapefiles/Misc/rv16my07.zip
+
+From the NWS.  Also NOAA has
+https://www.nohrsc.noaa.gov/gisdatasets/
+https://www.nohrsc.noaa.gov/data/vector/master/b_nwrfc.tar.gz
+
+rv16my07.zip
+tl_2024_16047_linearwater.zip
+
+but they seem to be not correct, 
+or maybe I just messed up.
+
+ArcGIS has stuff, and so does OpenStreetMap.
+
+
+Luckily I found:
+https://hub.arcgis.com/maps
+which has some free stuff 
+including
+https://hub.arcgis.com/maps/4cf66bf1ae124bf59d1144b789529385/about
+
+North_America_Rivers
+North_America_Lakes
+
+
+other possibilities:
+
+https://www.arcgis.com/home/item.html?id=ddf2ddc54868482fb7eb4c09d658f960
+USA_Major_Lakes.lpk
+
+unfortunately, the lpk format is proprietary
+and not easily convertible to shapefile
+
+
+https://gis-fws.opendata.arcgis.com/maps/fws::flathead-river-watershed-layers/about
+Flathead_River_Watershed_Layers_8734494217112924006.zip
+Flathead_River_Watershed_Layers.zip
+
+didn't get anywhere
+
+-----
+
+Loading the data
+
+> source ~/Programming/maps/bin/activate
+(maps) > python
+Python 3.13.5 (main, Jun 11 2025, 15:36:57) [Clang 17.0.0 (clang-1700.0.13.3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> import matplotlib.pyplot as plt
+>>> import geopandas as gpd
+>>> 
+
+>>> dbpath = '/Users/telliott/Library/CloudStorage/Dropbox/data/'
+>>> fn = 'North_America_Lakes_and_Rivers.zip'
+>>> gdf = gpd.read_file(path+fn)
+
+
+sel = gdf['NameEn'].str.contains('Columbia')
+columbia = gdf[sel]
+>>> columbia['NameEn']
+718     Columbia River
+5008    Columbia River
+Name: NameEn, dtype: object
+>>> 
+
+
+Flathead Lake is *not* there
+
+sel = gdf['NameEn'].str.contains('Flathead')
+flathead = gdf[sel]
+
+>>> flathead['NameEn']
+3236                Flathead River
+5026                Flathead River
+5033     South Fork Flathead River
+5034    Middle Fork Flathead River
+5037     North Fork Flathead River
+Name: NameEn, dtype: object
+>>> 
+
+seems to be only the river
+so look at the other file
+
+fn = 'North_America_Lakes.zip'
+gdf = gpd.read_file(path+fn)
+
+sel = gdf['NameEn'].str.contains('Flathead')
+flathead = gdf[sel]
+
+
+>>> gdf[sel]
+       FID  ...                                           geometry
+6198  6199  ...  POLYGON ((-114.13348 48.07369, -114.13073 48.0...
+
+[1 rows x 10 columns]
+>>> flathead = gdf[sel]
+>>> flathead['NameEn']
+6198    Flathead Lake
+Name: NameEn, dtype: object
+>>> 
+
+So the answer seems to be that Flathead Lake *is* in
+'North_America_Lakes.zip'
+
+and not in 
+'North_America_Lakes_and_Rivers.zip'
+
+and the question is:  where did these really come from?
+
+get info gives hub.arcgis.com for both
+
+MD5 (/Users/telliott/Library/CloudStorage/Dropbox/data/North_America_Lakes.zip) = 0b0fb260bc83c4c898b21dbb2f1946aa
+>
+
+Try to download from arcgis and see if I get a match.
+
+https://hub.arcgis.com/datasets/4cf66bf1ae124bf59d1144b789529385/explore?layer=3&location=26.579001%2C-96.810890%2C2.87
+
+> md5 /Users/telliott/Downloads/North_America_Lakes.zip 
+MD5 (/Users/telliott/Downloads/North_America_Lakes.zip) = 0b0fb260bc83c4c898b21dbb2f1946aa
+
+Yes.
+
+Finally do the plot
+
+>>> import matplotlib.pyplot as plt
+>>> import geopandas as gpd
+
+>>> dbpath = '/Users/telliott/Library/CloudStorage/Dropbox/data/'
+>>> desk = '/Users/telliott/Desktop/'
+
+>>> fn = 'North_America_Lakes.zip'
+... gdf = gpd.read_file(dbpath+fn)
+... 
+>>> sel = gdf['NameEn'].str.contains('Flathead')
+... flathead = gdf[sel]
+... 
+>>> flathead['NameEn']
+6198    Flathead Lake
+Name: NameEn, dtype: object
+>>> fig,ax = plt.subplots(figsize=(7,7))
+... 
+>>> flathead.plot(ax=ax,color='blue')
+<Axes: >
+>>> plt.savefig(desk + 'flathead.png')
+>>> 
+
+Looks correct.
+
+Later on (8), I learned how to get OSM data using QGIS.
+
+flathead_QGIS.png
+

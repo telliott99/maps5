@@ -1,0 +1,8 @@
+split the data massaging from the plotting
+save the geometries with a new column appropriately named
+
+add BC
+
+add the Missouri River, the Bitteroot, etc.
+
+add the Lewis and Clark trails.

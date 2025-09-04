@@ -1,0 +1,247 @@
+Plotting river data.
+
+fn = 'North_America_Lakes_and_Rivers'
+path = '/Users/telliott/Programming/data/' + fn
+ofn = '/Users/telliott/Desktop/columbia.png'
+
+rivers = gpd.read_file(path)
+sel = rivers['NameEn'].str.contains('Columbia')
+columbia = rivers[sel]
+
+columbia.plot(ax=ax, 
+    color='red',linewidth=1)
+plt.savefig(ofn, dpi=300)
+
+# the following doesn't work as expected
+
+sel = rivers['NameEn'].str.contains('Snake')
+snake = rivers[sel]
+
+snake.plot(ax=ax, 
+    color='blue',linewidth=1)
+plt.savefig(ofn, dpi=300)
+
+b/c there are other rivers in the dataset w/same name
+
+one approach is to sort through and specify what we want
+say, by 'LengthKm'
+
+possibly a better way is to use 
+na_rivers = na_rivers.overlay(states, how='intersection')
+
+which filters only for stuff inside the states.boundary polygon.
+
+#=====
+
+older stuff
+-----
+
+as before, set up a venv and then activate it:
+> source /Users/telliott/Programming/maps_project/bin/activate
+
+do installs of matplotlib and geopandas as for MacBook
+
+Then
+> python (not p3)
+
+
+
+import matplotlib.pyplot as plt
+import geopandas as gpd
+
+path = '/Users/telliott/Programming/'
+path += 'data/b_nwrfc'
+gdf = gpd.read_file(path)
+
+fig,ax = plt.subplots(figsize=(7,7))
+gdf.boundary.plot(ax=ax, 
+    color='blue', linewidth=1)
+
+ofn = '/Users/telliott/Desktop/ex3a.png'
+plt.savefig(ofn, dpi=300)
+
+-----
+
+Looks plausible.
+
+gdf.iloc[0]['OBJ_IDENTIF']
+..
+DESCRIPTION            SAUK RIVER ABV WHITE CHUCK R - LOWER ZONE
+
+sel = gdf['DESCRIPTION'].str.contains('SNAKE')
+sub = gdf[sel]
+
+fig,ax = plt.subplots(figsize=(7,7))
+sub.boundary.plot(ax=ax, 
+    color='blue', linewidth=1)
+
+ofn = '/Users/telliott/Desktop/ex3b.png'
+plt.savefig(ofn, dpi=300)
+
+Not close to being right.
+
+-----
+
+sub = gdf.iloc[:3]
+sub.plot
+
+ex3c.png
+
+The lat and long do not match the description:  SAUK RIVER...
+
+-----
+
+fn = 'rv16my07'
+path = '/Users/telliott/Programming/data/' + fn
+gdf = gpd.read_file(path)
+
+no DESCRIPTION
+
+
+sel = gdf['PNAME'].str.contains('COLUMBIA')
+sub = gdf[sel]
+
+Looks like something isn't right with this data.
+
+-----
+Arc GIS Hub
+
+https://hub.arcgis.com/maps/4cf66bf1ae124bf59d1144b789529385/about
+
+download North American Rivers
+
+import matplotlib.pyplot as plt
+import geopandas as gpd
+
+fn = 'North_America_Lakes_and_Rivers'
+path = '/Users/telliott/Programming/data/' + fn
+ofn = '/Users/telliott/Desktop/ex3e.png'
+
+gdf = gpd.read_file(path)
+
+fig,ax = plt.subplots(figsize=(7,7))
+gdf.plot(ax=ax, 
+    color='blue',linewidth=0.2)
+plt.savefig(ofn, dpi=300)
+
+
+
+That looks promising.
+
+-----
+
+
+xmin, ymin, xmax, ymax = -130, 40, -110, 50
+sub = gdf.cx[xmin:xmax, ymin:ymax]
+
+
+fig,ax = plt.subplots(figsize=(7,7))
+sub.plot(ax=ax, 
+    color='blue',linewidth=0.2)
+plt.savefig(ofn, dpi=300)
+
+
+
+
+
+"Note that .cx does something slightly different than the gpd.overlay solution: it selects rows that intersect the bounding box but leaves the geometries intact, whereas the gpd.overlay solution will only return the parts of the geometries in the bounding box. Depending on the situation you may want one or the other."
+
+it's a bit awkward to construct the box
+
+from shapely.geometry import Polygon
+poly = Polygon([(xmin,ymin),(xmax,ymin),(xmax,ymax),(xmin,ymax)])
+gs = geopandas.GeoSeries(poly)
+bdf = geopandas.GeoDataFrame({'geometry': gs})
+
+sub = gdf.overlay(bdf, how='intersection')
+
+>>> 
+>>> sub = gdf.overlay(bdf, how='intersection')
+/Users/telliott/Programming/maps_project/lib/python3.10/site-packages/geopandas/geodataframe.py:2861: UserWarning: CRS mismatch between the CRS of left geometries and the CRS of right geometries.
+Use `to_crs()` to reproject one of the input geometries to match the CRS of the other.
+
+Left CRS: EPSG:4326
+Right CRS: None
+
+
+>>> copy = sub.to_crs('EPSG:4326')
+>>> copy.crs
+<Geographic 2D CRS: EPSG:4326>
+Name: WGS 84
+Axis Info [ellipsoidal]:
+- Lat[north]: Geodetic latitude (degree)
+- Lon[east]: Geodetic longitude (degree)
+Area of Use:
+- name: World.
+- bounds: (-180.0, -90.0, 180.0, 90.0)
+Datum: World Geodetic System 1984 ensemble
+- Ellipsoid: WGS 84
+- Prime Meridian: Greenwich
+
+>>> sub = copy
+>>>
+
+
+fig,ax = plt.subplots(figsize=(7,7))
+sub.plot(ax=ax, 
+    color='blue',linewidth=0.5)
+plt.savefig(ofn, dpi=300)
+
+
+This works too
+
+>>> plt.scatter([-120],[45],s=10,color='r')
+<matplotlib.collections.PathCollection object at 0x12093b5e0>
+>>> plt.savefig(ofn, dpi=300)
+
+-----
+
+Try to find a specific river:
+
+sel = gdf['NameEn'].str.contains('Columbia')
+>>> sub2 = gdf[sel]
+>>> sub2
+       FID Country  ... LengthKm                                           geometry
+718    719     CAN  ...   743.84  LINESTRING (-115.85207 50.30276, -115.85575 50...
+5008  5009     USA  ...  1152.11  LINESTRING (-117.63179 49.00074, -117.63179 49...
+
+[2 rows x 7 columns]
+>>> 
+
+sub2.plot(ax=ax, 
+    color='red',linewidth=1)
+plt.savefig(ofn, dpi=300)
+
+
+
+
+
+
+ofn = '/Users/telliott/Desktop/ex3f.png'
+
+
+FIPS for state of WA is 53, OR is 41
+
+fn = 'gz_2010_us_040_00_20m'
+path = '/Users/telliott/Programming/data/' + fn
+geo = gpd.read_file(path)
+sel = geo['STATE'] == '53'
+sub3 = geo[sel]
+
+# new plot
+
+fig,ax = plt.subplots(figsize=(7,7))
+
+# rivers in bbox
+sub.plot(ax=ax, 
+    color='blue',linewidth=0.5)
+
+sub2.plot(ax=ax, 
+    color='red',linewidth=1)
+
+sub3.boundary.plot(ax=ax, 
+    color='k',linewidth=0.5)
+
+plt.savefig(ofn, dpi=300)
+
+

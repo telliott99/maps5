@@ -1,0 +1,19 @@
+I.  Setup
+
+p3 is an alias I have set to /opt/homebrew/bin/python3
+
+In any convenient directory, e.g. ~/Programming, do:
+p3 -m venv maps
+
+I like working on the desktop so from ~/Desktop do
+source ~/Programming/maps/bin/activate
+
+then
+pip install --upgrade pip
+python -m pip install matplotlib
+python -m pip install geopandas
+
+to work from the command line:
+python (not p3!)
+
+and then do imports, etc.

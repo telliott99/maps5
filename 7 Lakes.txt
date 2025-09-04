@@ -1,0 +1,44 @@
+I had believed that Flathead Lake wasn't in my data.
+
+It isn't in North_America_Lakes_and_Rivers.zip
+
+
+>>> import matplotlib.pyplot as plt
+>>> import geopandas as gpd
+ 
+>>> path = '/Users/telliott/Programming/data/'
+>>> fn = 'North_America_Lakes_and_Rivers.zip'
+>>> gdf = gpd.read_file(path+fn)
+
+>>> xmin, ymin, xmax, ymax = -116, 47, -113, 49
+>>> from shapely.geometry import Polygon
+>>> poly = Polygon([(xmin,ymin),(xmax,ymin),(xmax,ymax),(xmin,ymax)])
+>>> 
+>>> gs = gpd.GeoSeries(poly)
+>>> bbox = gpd.GeoDataFrame({'geometry': gs})
+>>> 
+>>> copy = bbox.set_crs('EPSG:4326')  # does not alter bbox
+>>> bbox = copy
+>>> 
+>>> sub = gdf.overlay(bbox, how='intersection')
+>>> fig,ax = plt.subplots(figsize=(7,7))
+>>> 
+>>> sub.plot(ax=ax,color='blue')
+<Axes: >
+>>> plt.savefig('/Users/telliott/Desktop/ex.png',dpi=300)
+>>> 
+
+doesn't have it.
+
+Try
+
+fn = 'North_America_Lakes.zip'
+gdf = gpd.read_file(path+fn)
+hangs but then works
+
+sub = gdf.overlay(bbox, how='intersection')
+just hangs
+
+fig,ax = plt.subplots(figsize=(7,7))
+sub.plot(ax=ax,color='blue')
+plt.savefig('/Users/telliott/Desktop/ex.png',dpi=300)

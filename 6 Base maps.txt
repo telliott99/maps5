@@ -1,0 +1,81 @@
+
+Other basemaps, with OpenStreetMap etc.
+
+I found
+https://dlab.berkeley.edu/news/adding-basemaps-python-contextily
+
+Before starting Python do
+source ~/Programming/maps/bin/activate
+python -m pip install contextily
+
+The tutorial goes fine, except the url part didn't work
+ca_places_url = "https://www2.census.gov/geo/tiger/GENZ2019/shp/cb_2019_06_place_500k.zip"
+places = gpd.read_file(ca_places_url)
+
+b/c SSL: CERTIFICATE_VERIFY_FAILED
+
+I grab the file manually and then
+places = gpd.read_file('/Users/telliott/Programming/data/cb_2019_06_place_500k.zip')
+
+>>> places.plot();
+<Axes: >
+>>> plt.savefig('/Users/telliott/Desktop/example')
+>>> 
+
+We focus on Berkeley
+
+berkeley = places[places['NAME']=='Berkeley']
+berkeley = berkeley.to_crs('EPSG:3857')
+
+import contextily as cx
+
+ax = berkeley.plot(ec='r',fc='none',figsize=(9, 9))
+cx.add_basemap(ax)
+plt.savefig('/Users/telliott/Desktop/example')
+
+The tutorial goes on to plot BART stations.
+
+Then they mention other providers:
+
+>>> cx.providers.keys()
+dict_keys(['OpenStreetMap', 'MapTilesAPI', 'OpenSeaMap', 'OPNVKarte', 'OpenTopoMap', 'OpenRailwayMap', 'OpenFireMap', 'SafeCast', 'Stadia', 'Thunderforest', 'BaseMapDE', 'CyclOSM', 'Jawg', 'MapBox', 'MapTiler', 'TomTom', 'Esri', 'OpenWeatherMap', 'HERE', 'HEREv3', 'FreeMapSK', 'MtbMap', 'CartoDB', 'HikeBike', 'BasemapAT', 'nlmaps', 'NASAGIBS', 'NLS', 'JusticeMap', 'GeoportailFrance', 'OneMapSG', 'USGS', 'WaymarkedTrails', 'OpenAIP', 'OpenSnowMap', 'AzureMaps', 'SwissFederalGeoportal', 'TopPlusOpen', 'Gaode', 'Strava', 'OrdnanceSurvey', 'UN'])
+>>> 
+
+each provider has possibly more than one tile set
+cx.providers.OpenTopoMap.keys()
+dict_keys(['url', 'max_zoom', 'html_attribution', 'attribution', 'name'])
+
+
+have to match the crs
+sub = berkeley.to_crs(''EPSG:3857')
+ax = sub.plot(figsize=(9, 9))
+cx.add_basemap(ax,source=cx.providers.OpenTopoMap)
+
+plt.savefig('/Users/telliott/Desktop/berkeley_topo.png')
+
+Let's try another one:
+
+fn = '/Users/telliott/Programming/data/northwestUS.shp.zip'
+gdf = gpd.read_file(fn)
+sub = gdf.to_crs('EPSG:3857')
+
+ax = sub.boundary.plot(figsize=(9, 9))
+cx.add_basemap(ax,source=cx.providers.OpenTopoMap)
+
+plt.savefig('/Users/telliott/Desktop/northwestUS_topo.png', dpi=300)
+
+
+fn = 'North_America_Lakes_and_Rivers'
+path = '/Users/telliott/Programming/data/' + fn
+rivers = gpd.read_file(path)
+
+sel = rivers['NameEn'].str.contains('Columbia')
+columbia = rivers[sel]
+columbia = columbia.to_crs('EPSG:3857')
+
+cx.add_basemap(ax,source=cx.providers.OpenTopoMap)
+columbia.plot(ax=ax, 
+    color='red',linewidth=2)
+ofn='/Users/telliott/Desktop/columbia.png'
+plt.savefig(ofn, dpi=300)
+

@@ -1,0 +1,106 @@
+import pandas as pd
+d = {'col1': [1, 2, 3], 'col2': [1, 4, 9]}
+df = pd.DataFrame(data=d)
+
+>>> df
+   col1  col2
+0     1     1
+1     2     4
+2     3     9
+>>> df.dtypes
+col1    int64
+col2    int64
+dtype: object
+>>> df['col1'] == 1
+0     True
+1    False
+2    False
+Name: col1, dtype: bool
+>>>
+
+
+select a row
+
+loc and iloc
+loc is 'label-based'
+iloc is indexing
+
+>>> df['address'].isin(['WA','MT'])
+0     True
+1    False
+2     True
+Name: address, dtype: bool
+>>> 
+
+
+access one value
+
+>>> df.at[0,'address']
+'WA'
+>>>
+
+
+---------------
+
+can also do i,v in gdf.iterrows():
+
+>>> for i,r in df.iterrows():
+...     print(r)
+...     
+col1        1
+col2        1
+address    WA
+Name: 0, dtype: object
+col1        2
+col2        4
+address    ID
+Name: 1, dtype: object
+col1        3
+col2        9
+address    MT
+Name: 2, dtype: object
+>>> 
+
+
+---------------
+
+
+iloc
+
+output looks weird, but it is a row
+
+>>> df.iloc[0]
+name       Washington
+address            WA
+col1                1
+col2                1
+Name: 0, dtype: object
+>>> 
+
+slice
+
+>>> df = df.iloc[1:]
+>>> 
+>>> df
+      name address  col1  col2
+1    Idaho      ID     2     4
+2  Montana      MT     3     9
+>>>
+
+either df[sel] or df.loc[sel] will work
+
+
+
+
+numpy
+>>> s = pd.Series(np.random.randn(10))
+>>> s.iloc[list(range(0,10,2))]
+0    0.419652
+2    0.366315
+4    0.344134
+6    0.294649
+8   -1.310818
+dtype: float64
+>>> 
+
+

@@ -1,0 +1,40 @@
+putting labels on geo objects
+
+standard stuff:
+
+import matplotlib.pyplot as plt
+import geopandas as gpd
+
+dbpath = '/Users/telliott/Library/CloudStorage/Dropbox/data/'
+fn ='OR_WA_ID_MT_WY.shp.zip'
+
+gdf = gpd.read_file(dbpath+fn)
+
+L = ['Washington','Oregon','Idaho','Montana']
+sel = gdf['NAME'].isin(L)
+states = gdf[sel]
+
+=========
+
+the clever part:  .apply(lambda x: ...)
+
+
+
+states['coords'] = states['geometry'].apply(
+        lambda x: x.representative_point().coords[:])
+
+
+
+The coordinates are like [(x,y)]
+
+
+gdf['coords'] = [L[0] for L in gdf['coords']]
+
+gdf.boundary.plot()
+
+ha = horizontalalignment
+
+for idx,row in gdf.iterrows():
+    plt.annotate(text=row['NAME'], xy=row['coords'],ha='center')
+
+plt.savefig('/Users/telliott/Desktop/ex.png',dpi=300)

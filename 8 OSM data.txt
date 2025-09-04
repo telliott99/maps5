@@ -1,0 +1,97 @@
+I've been using two files I got from arcgis
+
+https://hub.arcgis.com/datasets/4cf66bf1ae124bf59d1144b789529385
+North_America_Lakes_and_Rivers
+
+has two layers
+North_America_Rivers
+North_America_Lakes
+
+Summary > Read more > Files Download
+
+I had been thinking that these don't have lakes.
+But now I check again and find Flathead Lake!!
+
+-----
+
+Anyway, decided to try to use OpenStreetMap
+
+well, really, this uses QGIS
+
+https://gis.stackexchange.com/questions/458775/how-can-i-export-a-layer-into-shp-in-qgis-when-it-is-not-an-option-in-the-file
+
+https://gis.stackexchange.com/questions/241814/downloading-polygon-files-like-lake-or-municipal-borders-from-openstreetmap-in
+
+download and open the QGIS application (it's huge)
+
+
+must dismiss the notification about could not verify
+then Privacy & Security > Allow Anyway
+
+mac mini:
+Open Sans font installation failed
+no such message on DAVE
+
+
+OSM place search plugin
+Go to Plugins in the menu bar > Manage and Install
+Find OSM place search in Not installed and click install
+
+
+Add the plugin in the panel
+It is already there
+View > Panels 
+
+
+New empty project
+
+
+Search for the item you need
+Name contains ... Flathead Lake
+only appears when pointer is on search term
+
+
+Add the item as a layer into your map
+toolbar underneath search box
+Add object in new layer
+
+
+Can change CSR bottom right
+Leave as EPSG:4326 / WGS 84
+
+
+Export the layer as a new file
+option-click the layer name in the browser panel
+Export > Save As
+
+change format to ESRI Shapefile
+provide a file name
+/Users/telliott/Desktop/flathead
+
+it works
+Leaves QGIS app icon on Desktop, won't put into Dock
+
+Six files
+
+
+> source ~/Programming/maps/bin/activate
+(maps) > python
+Python 3.13.5 (main, Jun 11 2025, 15:36:57) [Clang 17.0.0 (clang-1700.0.13.3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import geopandas as gpd
+>>> path = '/Users/telliott/Programming/data/'
+>>> gdf=gpd.read_file(path + 'flathead_QGIS/flathead')
+
+# also works
+>>> gdf=gpd.read_file(path + 'flathead_QGIS/flathead.shp')
+
+>>> import matplotlib.pyplot as plt
+>>> fig,ax = plt.subplots(figsize=(7,7))
+>>> gdf.plot(ax=ax,color='b')
+<Axes: >
+>>> plt.savefig('/Users/telliott/Desktop/flathead_QGIS.png')
+>>> 
+
+
+
+

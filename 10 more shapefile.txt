@@ -1,0 +1,75 @@
+from wikipedia
+
+shapefile is generic name for format
+binary (opaque)
+various files with extensions:
+.shp feature geometry
+.shx positional index
+.dbf columns
+
+various other files
+.prf etc
+
+all with same fn, in directory with that fn
+usually comes zipped
+
+x.shp.zip 
+
+alternative formats, e.g.
+
+https://eric.clst.org/tech/usgeojson/
+
+GeoJSON  like json but for geo
+KML      keyhole markup language, XML-based
+
+KML was developed for Google Earth
+
+=====
+
+Interconversion
+online
+https://mygeodata.cloud
+
+but geopandas will do it
+
+https://geopandas.org/en/stable/docs/user_guide/io.html
+
+leverages
+
+https://gdal.org/en/stable/
+
+huge number of formats
+
+.shp <=> GeoJSON
+
+read or write
+just specify the driver
+
+gdf.to_file(
+    filename=ofn,
+    driver='ESRI Shapefile')
+
+=====
+
+GeoJSON example
+
+https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_outline_20m.json
+
+reformatted
+
+{
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", 
+  "properties":
+    { "TYPE": "MEXICAN", "R_STATEFP": "48", "L_STATEFP": "" }, 
+  "geometry": 
+    { "type": "LineString", "coordinates": 
+    [ [ -97.145567, 25.971132 ], 
+    [ -97.172633, 25.962883 ],
+    ...
+    [ -106.472514, 31.751802 ], 
+    [ -106.528543, 31.783907 ] ] } }
+
+The GeoJSON is 773 KB, the zipped shapefile is 367 KB.
+

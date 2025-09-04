@@ -1,0 +1,61 @@
+The lakes and rivers are all of NA and they take a long time to load,
+so I modified the code to write shapefiles for the overlaid versions.
+
+slim.py
+
+nw_lakes.shp.zip
+nw_rivers.shp.zip
+
+was > 30 sec, now almost instantaneous
+
+-----
+
+https://open.canada.ca/data/en/dataset/a883eb14-0c0e-45c4-b8c4-b54c4a819edb
+
+https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/2016/lpr_000b16a_e.zip
+
+
+
+import matplotlib.pyplot as plt
+import geopandas as gpd
+
+dbpath = '/Users/telliott/Library/CloudStorage/Dropbox/data/'
+desk = '/Users/telliott/Desktop/'
+
+fn = 'lpr_000b16a_e.zip'
+
+gdf = gpd.read_file(dbpath + fn)
+df = gdf.to_crs('EPSG:4269')
+
+ax = gdf.boundary.plot(
+    figsize=(9,9), color='b')
+
+ofn = desk + 'canada.png'
+plt.savefig(ofn, dpi=600)
+
+
+
+>>> gdf.crs
+<Projected CRS: PROJCS["PCS_Lambert_Conformal_Conic",GEOGCS["NAD83 ...>
+Name: PCS_Lambert_Conformal_Conic
+Axis Info [cartesian]:
+- [east]: Easting (metre)
+- [north]: Northing (metre)
+Area of Use:
+- undefined
+Coordinate Operation:
+- name: unnamed
+- method: Lambert Conic Conformal (2SP)
+Datum: North American Datum 1983
+- Ellipsoid: GRS 1980
+- Prime Meridian: Greenwich
+
+>>>
+
+
+13 rows 
+
+sel = (gdf['PRENAME'] == 'British Columbia') | (gdf['PRENAME'] == 'Alberta')
+
+modify mk_shapefile.py to handle 
+

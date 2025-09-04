@@ -1,0 +1,79 @@
+import pandas as pd
+import numpy as np
+
+D = {'name':list('abcd'), 'square': [1,4,9,16] }
+df = pd.DataFrame(D)
+
+>>> df
+  name  square
+0    a       1
+1    b       4
+2    c       9
+3    d      16
+>>>
+
+df1 = pd.DataFrame(np.random.randn(6,4),
+         index=list('abcdef'),
+         columns=list('ABCD'))
+
+>>> df1
+          A         B         C         D
+a -0.151537  0.715220 -0.087351  0.028157
+b -0.059537  0.439283  0.707275  1.275437
+c -0.195085 -0.954388  0.241326  0.048712
+d  0.681453  1.328523  1.670975 -2.217207
+e  0.208613  0.732733 -1.212113  1.155192
+f  0.809330  0.093510  1.154681  0.670906
+>>>
+
+------------------------------------
+
+.loc
+label-based
+
+selection by callable usually done with lambda
+
+>>> df1.loc[lambda df: df['A'] > 0, :]
+          A         B         C         D
+d  0.681453  1.328523  1.670975 -2.217207
+e  0.208613  0.732733 -1.212113  1.155192
+f  0.809330  0.093510  1.154681  0.670906
+>>> 
+
+we asked for rows where df['A'] is positive, all columns
+
+now all rows, columns df[1,2]
+note i:j includes j
+
+>>> df1.iloc[:, lambda df: [1,2]]
+          B         C
+a  0.715220 -0.087351
+b  0.439283  0.707275
+c -0.954388  0.241326
+d  1.328523  1.670975
+e  0.732733 -1.212113
+f  0.093510  1.154681
+>>>
+
+
+>>> df1['B'].loc[lambda t: t > 0.7]
+a    0.715220
+d    1.328523
+e    0.732733
+Name: B, dtype: float64
+>>> 
+
+
+
+>>> labels = [1,2,5]
+>>> s = pd.Series([1, 2, 3])
+>>> s.loc[s.index.intersection(labels)]
+1    2
+2    3
+dtype: int64
+>>>
+
+
+
+
+

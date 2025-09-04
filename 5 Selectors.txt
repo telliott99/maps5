@@ -1,0 +1,276 @@
+A common operation is to select rows from a dataframe.
+
+>>> d = {'col1': [1, 2], 'col2': [3, 4]}
+>>> df = pd.DataFrame(data=d)
+>>> df
+   col1  col2
+0     1     3
+1     2     4
+>>> df.dtypes
+col1    int64
+col2    int64
+dtype: object
+>>> df['col1'] == 1
+0     True
+1    False
+Name: col1, dtype: bool
+>>>
+
+The result is a actually an object of <class 'pandas.core.series.Series'>.
+
+I call an expression like `df['col1'] == 1` a *selector*.  
+
+To actually select the rows
+
+>>> sel = df['col1'] == 1
+>>> df[sel]
+   col1  col2
+0     1     3
+>>>
+
+Another common operation for dataframes is `apply`:
+
+>>> def f(row):
+...     return row['col1'] > 1
+... 
+>>> df.apply(f,axis=1)
+0    False
+1     True
+dtype: bool
+>>> sel = df.apply(f,axis=1)
+>>> df[sel]
+   col1  col2
+1     2     4
+>>>
+
+I didn't find this in geopandas docs (it's a pandas thing)
+But it allows you to write an arbitrary function.
+
+=====
+
+In geopandas we might do this:
+
+>>> gdf = gpd.read_file(path)
+>>> sel = rivers['NameEn'].str.contains('Columbia')
+>>> columbia = gdf[sel]
+
+The actual expression depends on the columns of the gdf.  
+All the identifiers are case sensitive.
+
+or this:
+
+>>> ID = gdf[gdf['STATE'] == '16']
+
+The geodataframe has a column 'STATE' with the FIPS identifiers for each state.
+'16' is Idaho.
+
+When dealing with the Snake River, I found that 
+
+>>> snake.columns
+Index(['FID', 'Country', 'NameEn', 'NameEs', 'NameFr', 'LengthKm', 'geometry'], dtype='object')
+
+One column is 'LengthKm'
+
+sel = snake['LengthKm'] == 1591.5300
+
+
+***
+rather than 
+sel = gdf['STATE'] in ['16','53']
+do
+sel = ddf['NAME'].isin(['ID','MT'])
+
+
+
+
+=====
+
+Another approach is to use a rectangle or bounding box, bbox.
+
+There are two flavors:  cx and overlay
+
+The big difference is that cx "leaves the geometries intact".
+
+cx is called like so:
+>>> sub = gdf.cx[xmin:xmax, ymin:ymax]
+
+Here is an example where we construct a bbox:
+
+
+>>> xmin, ymin, xmax, ymax = -118, 42, -116, 47
+>>> from shapely.geometry import Polygon
+>>> poly = Polygon([(xmin,ymin),(xmax,ymin),(xmax,ymax),(xmin,ymax)])
+
+>>> gs = gpd.GeoSeries(poly)
+>>> bbox = gpd.GeoDataFrame({'geometry': gs})
+
+>>> copy = bbox.set_crs('EPSG:4269')  # does not alter bbox
+>>> bbox = copy
+
+>>> sub = snake.overlay(bbox, how='intersection')
+
+=====
+
+To do:
+
+We should be able to use overlay with a boundary
+
+=====
+
+OLD VERSION:
+
+VII.  Bounding boxes, etc.
+
+Snake River
+
+getting a subset of the data
+
+cx "leaves the geometries intact"
+
+overlay 
+"will only return the parts of the geometries in the bounding box"
+
+cx is called
+sub = gdf.cx[xmin:xmax, ymin:ymax]
+
+overlay
+sub = gdf.overlay(bdf, how='intersection')
+
+crs must match!
+
+-----
+
+import matplotlib.pyplot as plt
+import geopandas as gpd
+
+fn = 'western_states.shp'
+fn = 'northwestUS.shp.zip'
+
+path = '/Users/telliott/Programming/data/'
+gdf = gpd.read_file(path + fn)
+
+ID = gdf[gdf['STATE'] == '16']
+
+fn = 'North_America_Lakes_and_Rivers.zip'
+rivers = gpd.read_file(path + fn)
+
+sel = rivers['NameEn'].str.contains('Snake')
+snake = rivers[sel]
+
+ID.crs is EPSG:4269
+snake.crs is EPSG:4326
+
+snake = snake.to_crs('EPSG:4269')
+
+sub = ID.overlay(snake, how='intersection')
+is empty
+
+
+ID.bounds
+         minx       miny        maxx       maxy
+2 -117.243027  41.988057 -111.043564  49.001146
+
+sub = snake.cx[-117.24:41.988, -111.04:49.001]
+
+ax = ID.boundary.plot(color='k')
+sub.plot(ax=ax,color='r',lw=2)
+
+ofn='/Users/telliott/Desktop/ex.png'
+plt.savefig(ofn, dpi=300)
+
+I think the code above should work, but it does not.
+b/c
+gdf.cx[xmin:xmax, ymin:ymax]
+
+too bad you can't just feed bounds to .cx
+
+-----
+
+Here is another idea:
+
+>>> snake['NameEn']
+2762        Snake Indian River
+2763               Snake River
+4435               Snake River
+4541    South Fork Snake Creek
+4542               Snake Creek
+4578               Snake River
+4657        Little Snake River
+4725               Snake River
+5074               Snake Creek
+5121               Snake River
+Name: NameEn, dtype: object
+>>> snake.columns
+Index(['FID', 'Country', 'NameEn', 'NameEs', 'NameFr', 'LengthKm', 'geometry'], dtype='object')
+>>> snake['LengthKm']
+2762      83.5540
+2763     286.6920
+4435     153.8240
+4541     143.2200
+4542     103.7290
+4578      24.7821
+4657     207.5600
+4725    1591.5300
+5074      47.1682
+5121      55.3752
+Name: LengthKm, dtype: float64
+>>>
+
+The one with index 4725 is the longest.
+
+sel = snake['FID'] == 4725
+does not work as str or int
+
+sel = snake['LengthKm'] == 1591.5300
+does work
+
+snake = snake[sel]
+
+
+ax = snake.plot(color='k')
+ofn='/Users/telliott/Desktop/ex.png'
+plt.savefig(ofn, dpi=300)
+
+So that should do it.  But why does the bbox method fail?
+
+b/c order of terms is wrong!
+
+gdf.cx[xmin:xmax, ymin:ymax]
+
+sub = snake.cx[-118:-116]
+does not work
+
+sub = snake.cx[-118:-116,42:47]
+*does* work
+
+ax = sub.plot(color='k')
+ofn='/Users/telliott/Desktop/ex1.png'
+plt.savefig(ofn, dpi=300)
+
+remember:
+cx leaves the geometries intact!
+
+it's a bit awkward to construct the box
+
+
+xmin, ymin, xmax, ymax = -118, 42, -116, 47
+from shapely.geometry import Polygon
+poly = Polygon([(xmin,ymin),(xmax,ymin),(xmax,ymax),(xmin,ymax)])
+
+gs = gpd.GeoSeries(poly)
+bbox = gpd.GeoDataFrame({'geometry': gs})
+
+copy = bbox.set_crs('EPSG:4269')  # does not alter bbox
+bbox = copy
+
+sub = snake.overlay(bbox, how='intersection')
+
+ID.plot(ax=ax)
+>>> sub.plot(ax=ax,color='r',lw=2)
+<Axes: >
+>>> 
+>>> ofn='/Users/telliott/Desktop/ex.png'
+>>> plt.savefig(ofn, dpi=300)
+
+
+

@@ -1,0 +1,76 @@
+II.  Geopandas basics
+
+python
+
+import matplotlib.pyplot as plt
+import geopandas as gpd
+
+fn = 'gz_2010_us_040_00_5m'
+path = '/Users/telliott/Programming/data/' + fn
+gdf = gpd.read_file(path)
+
+gdf is a geo dataframe
+
+Often a gdf has more than what you want so you filter.
+fips are numerical codes for regions (states)
+
+'AZ':'04','CA':'06','CO':'08',
+'ID':'16','MT':'30','NV':'32',
+'NM':'35','OR':'41','TX':'48',
+'UT':'49','WA':'53','WY':'56'
+
+sel = gdf['STATE'] == '53'
+
+geometry is an attribute for each row, a POLYGON or MULTIPOLYGON
+
+selectors are tricky, this doesn't work:
+sel = gdf['STATE'] == '41' or gdf['STATE'] == '53'
+but this does
+sel = (gdf['STATE'] == '41') | (gdf['STATE'] == '53')
+
+gdf[f(gdf['STATE'])]
+
+OR = gdf['STATE'] == '41'
+WA = gdf['STATE'] == '53'
+sel = OR | WA
+gdf[sel]
+
+the above works
+
+or do
+sel = gdf['STATE'].isin(['41','53'])
+
+
+ofn = '/Users/telliott/Desktop/summary1.png'
+fig,ax = plt.subplots(figsize=(7,7))
+sub.boundary.plot(ax=ax, 
+    color='blue', linewidth=1)
+plt.savefig(ofn, dpi=300)
+
+https://github.com/telliott99/maps3/blob/master/2a-west.shp/make_shapefiles.py
+
+shows how to make a shapefile
+
+
+fipsD = { 'AZ':'04','CA':'06','CO':'08',
+          'ID':'16','MT':'30','NV':'32',
+          'NM':'35','OR':'41','TX':'48',
+          'UT':'49','WA':'53','WY':'56'}
+
+# filter
+OR = gdf[gdf['STATE'] == fipsD['OR']]
+WA = gdf[gdf['STATE'] == fipsD['WA']]
+ID = gdf[gdf['STATE'] == fipsD['ID']]
+MT = gdf[gdf['STATE'] == fipsD['MT']]
+
+northwest = pd.concat([OR,WA,ID,MT])
+ofn = 'northwestUS.shp.zip'
+northwest.to_file(
+  filename=ofn,driver='ESRI Shapefile')
+
+ofn = '/Users/telliott/Desktop/nw.png'
+fig,ax = plt.subplots(figsize=(7,7))
+northwest.boundary.plot(ax=ax, 
+    color='blue', linewidth=1)
+plt.savefig(ofn, dpi=300)
+

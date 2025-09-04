@@ -1,0 +1,54 @@
+Somewhere I have a basemap example that failed b/c zoom level.
+
+Now that I have the data sources and scripts on Dropbox, I will try again.
+
+The script is columbia+topo.py and it works.
+Both on DAVE and the MINI.
+
+So I'm not sure what the issue was.
+
+Todo:
+
+The final map with rivers+topo.py
+
+basemap means that snake river isn't plotted
+the reason is a CRS mismatch
+
+we've been changing all the other data to 'EPSG:3857'.
+'EPSG:3857' is "like" WGS84
+
+The river and lake data is EPSG:4326
+
+The state boundary data is EPSG:4269
+
+What about albers?
+EPSG:9822
+
+
+
+note:  it is possible to change crs for the basemap
+I like that!
+
+#-----
+
+
+one of the other entries triggers the zoom warning.
+
+an even bigger problem:
+one of the data sets causes the plot to shift to include much more of the US
+
+it's the pend oreille
+not the plotting of it, but just getting the dataset!
+it must contain some points from elsewhere
+
+maybe we should filter at the very beginning for 
+overlay with the boundary of the region
+
+This does lose the part of the Columbia in BC and the Flathead etc.
+
+
+#-----
+
+I don't have the zoom warning any more
+
+
