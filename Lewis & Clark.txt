@@ -1,0 +1,25 @@
+There is a lot of info online about the trail followed by Lewis & Clark.
+
+There is an org called
+https://lewisandclark.org
+
+connected somehow with
+https://www.lewisandclark.travel
+
+https://www.lewisandclark.travel/inspiration/kamiah-idaho-to-lolo-montana-via-us-hw-12/
+
+but lacking detailed gps coordinates.
+
+OpenStreetMaps has some `way` entries.
+Search lolo trail
+
+13848899  Unclassified, Idaho County, middle part of the Lolo Trail
+814356790 a very small section
+
+12280494  looks like what we want
+Has a url to the Forest Service, but seems to be a dead link
+
+https://www.nps.gov/nepe/learn/historyculture/lolo-trail-and-pass.htm
+
+See if we can get it with QGIS
+fails with "read-only file system"
