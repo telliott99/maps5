@@ -117,5 +117,5 @@ Fort_Peck_L.plot(ax=ax,color='b')
 Canyon_Ferry_L.plot(ax=ax,color='b')
 
 
-ofn='/Users/telliott/Desktop/current.png'
+ofn='/Users/telliott/Desktop/nw_rivers.png'
 plt.savefig(ofn, dpi=600)

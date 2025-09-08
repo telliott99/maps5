@@ -1,0 +1,128 @@
+There is a lot of info online about the trail followed by Lewis & Clark.
+
+There is an org called
+https://lewisandclark.org
+
+connected somehow with
+https://www.lewisandclark.travel
+
+https://www.lewisandclark.travel/inspiration/kamiah-idaho-to-lolo-montana-via-us-hw-12/
+
+but lacking detailed gps coordinates.
+
+OpenStreetMaps has some `way` entries.
+Search lolo trail
+
+13848899  Unclassified, Idaho County, middle part of the Lolo Trail
+814356790 a very small section
+
+12280494  looks like what we want
+Has a url to the Forest Service, but seems to be a dead link
+
+https://www.nps.gov/nepe/learn/historyculture/lolo-trail-and-pass.htm
+
+See if we can get it with QGIS
+fails with "read-only file system"
+
+------------------------------
+
+I found two files on ArcGIS
+
+https://www.arcgis.com/home/item.html?id=862abcecaa114974845b9ebe5bfa6e2f
+
+this first one looks nice and shows in the map viewer
+has a nice basemap
+but no way to download it
+
+There is a link to NPS
+but won't work with Safari
+
+-----
+
+The second one
+
+https://www.arcgis.com/home/item.html?id=6cd9a2f5e8db491da8322d8004b3e0d7
+
+can be downloaded
+
+Lewis_and_Clark_Trail_Historic_Route.zip
+
+unzip
+
+Lewis_and_Clark_Trail_Historic_Route_0.kmz
+
+geopandas couldn't read it
+
+wikipedia says KML is Keyhole Markup Language
+Google Earth stuff
+KMZ is a zipped KML, why zipped twice who knows?
+note:  WGS84 crs
+
+One online converter choked
+https://atlas.co/convert/kmz-to-kml/
+
+But another one 
+https://convert.guru/kmz-converter
+
+gave me
+doc.kml
+which I can download
+
+
+and that one I could read with geopandas
+import geopandas as gpd
+import matplotlib.pyplot as plt
+import contextily as cx
+
+fn = 'doc.kml'
+gdf = gpd.read_file(fn,driver='LIBKML')
+
+57 rows
+columns are 'Name', 'Description', 'geometry'
+
+Name are indexes
+Description are hmtl
+"Lewis Finds Shortcut East" etc.
+
+and then geometry are LINESTRING and MULTILINESTRING
+
+Plot looks good, except not very detailed
+Bounding box for Lolo Trail is about
+
+crs is WGS 'EPSG:4326'
+
+
+xmin = -116.03
+ymin = 46.107
+xmax = -114.08
+ymax = 46.828
+
+from shapely.geometry import Polygon
+poly = Polygon([(xmin,ymin),(xmax,ymin),(xmax,ymax),(xmin,ymax)])
+gs = gpd.GeoSeries(poly)
+bbox = gpd.GeoDataFrame({'geometry': gs})
+bbox = bbox.set_crs('EPSG:4326')
+sub = gdf.overlay(bbox, how='intersection')
+
+states_fn = '/Users/telliott/Library/CloudStorage/D\
+ropbox/data/OR_WA_ID_MT_WY.shp.zip'
+states = gpd.read_file(states_fn)
+
+ID = states['NAME'] == 'Idaho'
+MT = states['NAME'] == 'Montana'
+
+states = states[ID | MT]
+states = states.to_crs('EPSG:4326')
+
+ax = states.boundary.plot(color='k',lw=0.5)
+sub['geometry'].representative_point().plot(ax=ax)
+sub.plot(ax=ax,color='r',lw=0.4)
+plt.savefig('ex.png',dpi=300)
+
+
+also need the camps
+
+https://gis.stackexchange.com/questions/238533/extracting-points-from-linestring-or-polygon-and-making-dictionary-out-of-them-i
+
+
+

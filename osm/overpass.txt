@@ -1,0 +1,110 @@
+OpenStreetMap (OSM) has a lot of data.
+
+Overpass is read-only API to access OSM data.
+https://overpass-turbo.eu
+
+There is a GUI, it can also be done with code.
+
+Learn Overpass
+https://osmlab.github.io/learnoverpass//en/
+https://osmlab.github.io/learnoverpass/en/exercises/intro/1/
+editor is grayed out
+
+
+There was an issue with
+Settings:  
+unselect Enable rich code editor
+but now I can't remember which web app that was
+
+
+What I did:  paste their first example into Overpass
+
+// south, west, north, east
+node(48.5657094,13.4490548,48.5662416,13.4501676);
+out;
+out;
+
+yesterday
+opens openstreetmap.org in a new tab
+
+today
+does not
+
+returns all nodes within that bbox
+Have to move the map slightly to see them
+
+Node 3308213268 ✏
+Coordinates
+48.5659458 / 13.4491589 (lat/lon)
+
+click on the Node: 
+1 way
+building=shed
+324066031
+
+click on the way
+shows 5 nodes, it's a shed
+
+try searching for the way
+
+way(324066031);
+out;
+
+error:  a way cannot be displayed without its coordinates
+autorepair
+
+way(324066031);
+/*added by auto repair*/
+(._;>;);
+/*end of auto repair*/
+out;
+
+It looks like this:
+  <node id="3308213268" lat="48.5659458" lon="13.4491589"/>
+  <node id="3308213269" lat="48.5659442" lon="13.4492436"/>
+  <node id="3308213270" lat="48.5658609" lon="13.4492401"/>
+  <node id="3308213271" lat="48.5658625" lon="13.4491554"/>
+  <way id="324066031">
+    <nd ref="3308213268"/>
+    <nd ref="3308213269"/>
+    <nd ref="3308213270"/>
+    <nd ref="3308213271"/>
+    <nd ref="3308213268"/>
+    <tag k="building" v="shed"/>
+  </way>
+
+Lots of examples have {{bbox}}
+nwr({{bbox}});
+out;
+
+That's because 
+https://dev.overpass-api.de/overpass-doc/en/full_data/bbox.html
+
+the substring {{bbox}} is replaced by the bounding box of the viewport.
+
+https://gis.stackexchange.com/questions/485420/what-is-an-overpass-query-to-get-osm-hiking-trails-in-the-us
+
+nwr["route"="hiking"](51.94355060971912,5.648303031921388,51.96706261034769,5.693578720092774);
+// print results
+out geom;
+
+so I edit to
+
+nwr["route"="hiking"]{{bbox}};
+out geom;
+
+which gives an error
+
+nwr["route"="hiking"](46.773, -114.253, 46.774, -114.251);
+out;
+
+
+[out:json];
+(
+nwr["route"="hiking"](46.7, -114.2, 46.8, -114.3));
+out body;
+>;
+out skel qt;
+
+
+
