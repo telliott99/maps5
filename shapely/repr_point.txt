@@ -1,0 +1,135 @@
+there is a useful thing called a 'representative_point'
+
+import geopandas as gpd
+
+dbpath = '/Users/telliott/Library/CloudStorage/Dropbox/maps5/lewis_clark/'
+fn = 'doc.kml'
+gdf = gpd.read_file(dbpath+fn,driver='LIBKML')
+
+e = gdf.iloc[0]
+print(type(e))
+
+<class 'pandas.core.series.Series'>
+
+print(e.representative_point())
+AttributeError: 'Series' object has no attribute 'representative_point'
+
+>>> e.geometry
+<MULTILINESTRING Z ((-114.088 46.749 0, -114.085 46.748 0, -114.084 46.747 0...>
+>>> e['geometry']
+<MULTILINESTRING Z ((-114.088 46.749 0, -114.085 46.748 0, -114.084 46.747 0...>
+
+well that's confusing.
+either one works
+
+
+coords = e.geometry['coordinates']
+TypeError: 'MultiLineString' object is not subscriptable
+>>> geom.representative_point()
+<POINT Z (-113.176 47.005 0)>
+>>> 
+
+
+so we can get a representative point from the geometry
+
+we don't have to do this:
+
+from shapely.geometry import LineString
+geom = e['geometry']
+coords = geom['coordinates']
+gs = gpd.GeoSeries(LineString(coords))
+rep_point = gs.representative_point()
+
+actually, this worked before but not now, don't know why
+
+
+>>> rp = geom.representative_point()
+>>> type(rp)
+<class 'shapely.geometry.point.Point'>
+>>> 
+
+
+problem:
+so sometimes representative_point() gives a point!
+
+and sometimes:
+rp is a shapely.coords.CoordinateSequence object
+
+there may be more than one so
+rep_point[0]
+
+it has a coords attribute
+
+
+https://github.com/shapely/shapely/issues/984
+so we want
+t = rep_point[0].coords[:][0]
+
+and then can do
+x,y,_ = t
+
+why so complicated?
+what difference from centroid?
+
+actually, if rp is a CoordinateSequence it's easier to do:
+list(rp)
+
+
+rp can also be a series!
+
+import geopandas as gpd
+from shapely.geometry import Point
+
+gs = gpd.GeoSeries(
+    [Point(1,1), Point(2,2), Point(3,3)])
+
+>>> rp = gs.representative_point()
+>>> 
+>>> type(rep_point)
+<class 'geopandas.geoseries.GeoSeries'>
+>>>
+
+This one is not a shapely.coords.CoordinateSequence 
+But it is just as complicated
+
+>>> t = rep_point[0].coords[:][0]
+>>> t
+(1.0, 1.0)
+>>> 
+>>> type(rep_point[0])
+<class 'shapely.geometry.point.Point'>
+>>> type(rep_point[0].coords)
+<class 'shapely.coords.CoordinateSequence'>
+>>> type(rep_point[0].coords[:])
+<class 'list'>
+>>> type(rep_point[0].coords[:][0])
+<class 'tuple'>
+>>> 
+
+
+
+work with the gdf
+
+import geopandas as gpd
+
+dbpath = '/Users/telliott/Library/CloudStorage/Dropbox/maps5/lewis_clark/'
+LC = gpd.read_file(dbpath + 'doc.kml',
+    driver='LIBKML')
+
+def f(e):
+    return e.representative_point().coords[:][0]
+
+gdf = LC['geometry'].apply(f)
+
+>>> gdf
+0     (-113.1762060005872, 47.00538999905787, 0.0)
+1     (-91.75296140877758, 38.69352509459112, 0.0)
+
+>>> type(gdf)
+<class 'pandas.core.series.Series'>
+>>> 
+
+
+Bottom line
+representative_point depends on the object
+if it's a CoordinateSeries, do list(rp)

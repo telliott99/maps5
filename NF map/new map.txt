@@ -1,0 +1,7 @@
+area bounded by
+
+49th parallel N   49
+Spokane W       -118
+Jackson S         43
+Great Falls E   -111
+

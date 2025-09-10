@@ -1,0 +1,45 @@
+https://data-usfs.hub.arcgis.com/search?groupIds=9c8a3bd574c2464b89fa147eaa698e13
+
+https://data-usfs.hub.arcgis.com/datasets/c6dae946a00a4fa3bf89e25772a1cc4a_5/explore
+
+downloads hang
+
+https://data.fs.usda.gov/geodata/edw/datasets.php?dsetCategory=boundaries
+
+finally
+
+BdyAdm_LSRS_AdministrativeForest.zip
+
+
+exploration:
+
+import geopandas as gpd
+
+dbpath = '/Users/telliott/data/'
+fn = 'BdyAdm_LSRS_AdministrativeForest.zip'
+gdf = gpd.read_file(dbpath + fn)
+
+
+[112 rows x 9 columns]
+
+>>> gdf.columns
+Index(['ADMINFORES', 'REGION', 'FORESTNUMB', 'FORESTORGC', 'FORESTNAME',
+       'GIS_ACRES', 'SHAPE_AREA', 'SHAPE_LEN', 'geometry'],
+      dtype='object')
+>>> 
+
+>>> gdf['FORESTNAME']
+0                     Ochoco National Forest
+1                    Olympic National Forest
+2      Rogue River-Siskiyou National Forests
+3                    Siuslaw National Forest
+4                   Umatilla National Forest
+
+
+s = 'FORESTNAME'
+L = list(gdf[s])
+L.sort()
+
+Clearwater wasn't there, but that's b/c it is really
+Nez Perce-Clearwater NF
+

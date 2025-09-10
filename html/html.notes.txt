@@ -1,2 +1,0 @@
-These html files display fine locally but not in github.
-Hence I've "hidden" them in this folder.

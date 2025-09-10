@@ -1,0 +1,27 @@
+LineString and MultiLineString objects.
+
+Lewis and Clark trail data.
+rows or "features" are either
+LineString or MultiLineString
+
+In either case, they have 
+'id', 'type', 'property', 'geometry'
+'type' is 'Feature', 'property' is html
+so geometry is the only really useful thing
+
+geom = e['geometry']
+
+geom has limited keys:  'type', 'coordinates'
+'type' is either 'LineString', 'MultiLineString'
+
+problem #1:
+if geometry is a MultiLineString, then
+geom['coordinates'] is like
+(((x,y), .. ),((x,y), .. ) .. )
+
+whereas, if it's a LineString, geom['coordinates'] is
+((x,y), .. ),((x,y), .. )
+
+so the code to read coordinates must be adjusted 
+based on the type.
+
