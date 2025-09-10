@@ -76,6 +76,9 @@ flathead_lake = na_lakes[sel]
 sel = na_lakes['NameEn'].str.contains('Pend Oreille')
 pend_oreille_lake = na_lakes[sel]
 
+sel = na_lakes['NameEn'].str.contains("Coeur d'Alene")
+coeur_dAlene = na_lakes[sel]
+
 sel = na_lakes['NameEn'].str.contains('Yellowstone')
 yellowstone_lake = na_lakes[sel]
 
@@ -85,8 +88,13 @@ fort_peck_lake = na_lakes[sel]
 sel = na_lakes['NameEn'].str.contains('Canyon Ferry')
 canyon_ferry_lake = na_lakes[sel]
 
+sel = na_lakes['NameEn'].str.contains('Koocanusa')
+koocanusa = na_lakes[sel]
+
 gdf = pd.concat([flathead_lake,pend_oreille_lake,yellowstone_lake,
-                fort_peck_lake,canyon_ferry_lake])
+                coeur_dAlene,fort_peck_lake,canyon_ferry_lake,
+                koocanusa])
+                
 gdf.to_file('my_lakes.shp.zip',driver='ESRI Shapefile')
 
 

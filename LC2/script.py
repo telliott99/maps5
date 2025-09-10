@@ -39,7 +39,7 @@ mycrs = 'EPSG:4326'
 
 # make the box
 xmin = -117.5
-ymin = 44.5
+ymin = 44
 xmax = -109
 ymax = 49
 
