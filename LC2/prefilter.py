@@ -62,6 +62,9 @@ jefferson = na_rivers[sel]
 sel = na_rivers['NameEn'].str.contains("Beaverhead")
 beaverhead = na_rivers[sel]
 
+sel = na_rivers['NameEn'].str.contains("Priest")
+beaverhead = na_rivers[sel]
+
 gdf = pd.concat([columbia,snake,yellowstone,clark_fork,
                 flathead,pend_oreille,missouri,clearwater,
                 bitterroot,jefferson,beaverhead])

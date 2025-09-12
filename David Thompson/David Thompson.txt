@@ -1,0 +1,25 @@
+Rocky Mountain House
+Rocky Moutain House, AB
+52.375278,-114.921667
+-114.921667,52.375278
+
+Kootenae House
+Invermere, BC
+50.526624,-116.04544
+-116.04544,50.526624
+
+Kullyspell House
+Pend Oreille Lake, east shore
+East Hope, ID
+48.22037,-116.26687
+-116.26687,48.22037
+
+Saleesh House
+Thompson Falls, MT
+47.572222,-115.305278
+-115.305278,47.572222
+
+Spokane House
+Nine Mile Falls, WA
+-117.531389,47.788056
+

@@ -1,0 +1,21 @@
+https://osm-queries.ldodds.com/tutorial/00-node-1.osm.html
+
+00
+select a node by id:
+node(1);
+out;
+
+01
+define a bounding box, restrict all query statements to the box
+[bbox:-25.38653, 130.99883, -25.31478, 131.08938];
+node;
+out skel;
+
+if you are using the IDE you can also do:
+{{bbox}}
+which restricts to the current viewport
+
+use a bbox for only part of the query
+node(-25.38653, 130.99883, -25.31478, 131.08938);
+
+02

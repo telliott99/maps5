@@ -1,0 +1,159 @@
+The goal is to find out why there is a gap between
+Pend Oreille River and the Lake on our plots.
+
+and then possibly fix it.
+
+TL;DR
+
+This is a working example of how to add to a GeoDataFrame.
+It also shows how to find nearest points.
+
+-------------------------------
+
+import geopandas as gpd
+dbpath = '/Users/telliott/data/'
+fn = 'North_America_Lakes_and_Rivers.zip'
+na_rivers = gpd.read_file(dbpath + fn)
+
+
+>>> na_rivers.crs
+<Geographic 2D CRS: EPSG:4326>
+Name: WGS 84
+
+
+sel = na_rivers['NameEn'].str.contains("Pend Oreille")
+po_river = na_rivers[sel]
+
+>>> sub
+
+
+       FID Country  ...  LengthKm                                           geometry
+3233  3234     CAN  ...   23.9743  LINESTRING (-117.62288 49.00561, -117.61532 49...
+4994  4995     USA  ...  139.2460  LINESTRING (-116.75457 48.15997, -116.75913 48...
+
+[2 rows x 7 columns]
+
+
+
+geom = sub.iloc[1]['geometry']
+>>> geom
+<LINESTRING (-116.755 48.16, -116.759 48.16, -116.764 48.16, -116.767 48.157...>
+>>> geom.bounds
+(-117.421307883071, 48.1439997098789, -116.754568877487, 49.0003164329327)
+>>> L = list(geom.coords)
+>>> len(L)
+502
+>>> L[0]
+(-116.754568877487, 48.1599716677888)
+>>> L[-1]
+(-117.353364035974, 49.0003164329327)
+>>> 
+
+
+WA/ID border is -117.039
+Priest River is -116.91
+Thama -116.83
+Laciede is -116.75
+close to the last point going east
+(provided the entries are in order!)
+
+outlet to the lake is about 
+-116.606761,48.240504
+
+so where are the missing points?
+
+make bbox
+xmin:xmax, ymin:ymax
+
+>>> sub2 = na_rivers.cx[-116.7545:-116.607,48.241:49]
+>>> sub2
+Empty GeoDataFrame
+Columns: [FID, Country, NameEn, NameEs, NameFr, LengthKm, geometry]
+Index: []
+>>> 
+
+maybe it's part of the lake?
+
+fn = 'North_America_Lakes.zip'
+na_lakes = gpd.read_file(dbpath+fn)
+sel = na_lakes['NameEn'].str.contains('Pend Oreille')
+pend_oreille_lake = na_lakes[sel]
+
+
+>>> pend_oreille_lake
+       FID Country  ...     Shape__Len                                           geometry
+6229  6230     USA  ...  199311.583081  POLYGON ((-116.37312 48.30847, -116.36875 48.3...
+
+[1 rows x 10 columns]
+>>> 
+>>> geom_lake = pend_oreille_lake.geometry
+>>> geom_lake.bounds
+            minx       miny       maxx      maxy
+6229 -116.625988  47.948526 -116.22288  48.32085
+
+
+I figured out how to find nearest_points
+see nearest_demo.py
+
+(<POINT (-116.755 48.16)>, <POINT (-116.626 48.243)>)
+
+closest river point is LON = -116.755
+closest lake point is  LON = -116.626
+
+we're missing 0.129 degrees
+
+>>> from math import *
+>>> circ = 40000
+>>> 0.129 * 40000
+5160.0
+>>> 0.129 * 40000/360
+14.333333333333334
+>>> 0.129 * 40000/360 * cos(radians(48))
+9.590872024476969
+>>> dx = -116.626 - -116.755
+>>> dy = 48.243 - 48.16
+>>> dx *= cos(radians(48))
+>>> dx *= 40000/360
+>>> dy *= 40000/360
+>>> lsq = dx**2 + dy**2
+>>> lsq**0.5
+13.30542028295019
+>>> 
+
+
+Roughly, 13.3 km
+
+I figured out how to compute lengths
+15.632
+
+considering the curved course, that seems very close
+
+------
+
+west of -116.625988 is not in the lake
+take points from Google Maps
+
+s = '''
+48.248589733216136, -116.64432444663814
+48.256213458503204, -116.67112139993714
+48.24972525370046, -116.68793039791562
+48.23447473170333, -116.69304617990908
+48.22360190290814, -116.69718752629615
+48.209804691843075, -116.71643261093814
+48.19194395801155, -116.71497095894
+48.185122762281175, -116.71497095894
+48.17618887113204, -116.7286130442559
+48.167253423001256, -116.73738295624466
+48.162541377351445, -116.74347317265425'''
+
+
+>>> L = []
+>>> for row in s.strip().split('\n'):
+...     parts = row.strip().split(',')
+...     y = float(parts[0])
+...     x = float(parts[1])
+...     L.append((x,y))
+...     
+
+See the script mk_gdf.py for how to make a gdf from these guys
+
