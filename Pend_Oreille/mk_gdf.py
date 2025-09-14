@@ -64,9 +64,7 @@ for e in data:
 #---------------
 
 # the geometry part
-
 LS = LineString(zip(X,Y))
-
 
 new_pts = gpd.GeoDataFrame(
     df,geometry=[LS],crs="EPSG:4326")
@@ -77,10 +75,6 @@ new_pts.to_file('po_addns.shp.zip',
 ax = po_river.plot(color='k')
 new_pts.plot(ax=ax,color='r')
 plt.savefig('out.png',dpi=300)
-
-# not working
-sub = new_pts.to_crs('32718')
-print(sub.length)
 
 
 '''
