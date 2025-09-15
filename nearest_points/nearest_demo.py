@@ -25,7 +25,6 @@ sel = na_lakes['NameEn'].str.contains('Pend Oreille')
 po_lake = na_lakes[sel]
 
 LS = po_river.iloc[1].geometry
-
 PG = po_lake.iloc[0].geometry
 
 result = nearest_points(
@@ -39,3 +38,25 @@ print(result)
 '''
 
 # lemme just check
+mind = 1e8
+t = None
+
+L1 = [(p) for p in LS.coords]
+L2 = [(p) for p in PG.boundary.coords]
+for p in LS.coords:
+    for q in PG.boundary.coords:
+        d = (p[0]-q[0])**2 + (p[1]-q[1])**2
+        if d < mind:
+            mind = d
+            t = (p,q)
+
+print(t[0])
+print(t[1])
+
+'''
+(maps) > python nearest_demo.py
+(<POINT (-116.755 48.16)>, <POINT (-116.626 48.243)>)
+(-116.754568877487, 48.1599716677888)
+(-116.625988077196, 48.2426547363217)
+(maps) > 
+'''

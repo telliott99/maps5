@@ -1,6 +1,6 @@
-You can't make maps unless you have the data.
+You can't make maps unless you have the data.  I have this project in my Dropbox folder locally, and I've gone back to the free tier.  As a result, I cannot actually host the large data here.
 
-I have noted the places where I found the data files used for this project as I went along, but I'm going to summarize them here.
+I have noted the places where I found the files used for this project as I went along, but I'm going to summarize them here.
 
 Usually, a web search on the name of the data file will reveal the source.
 -----
@@ -8,17 +8,22 @@ US state borders
 
 gz_2010_us_040_00_5m.zip
 
-In this one case, geopandas chokes on the file unless it's unzipped first.gz_2010_us_040_00_5m
+In this one case, geopandas chokes on the file unless it's unzipped first.
+
+gz_2010_us_040_00_5m
 
 There are 500k, 5m and 40m versions, with the 500k being the most detailed and the 40m the least.  The 040 part refers to the 50 States + territories (including Asian Pacific).  One can also get the counties.
 
 @census.gov
+
 https://www.census.gov/geographies/mapping-files/2010/geo/carto-boundary-file.html
 
 @Eric Celeste
+
 https://eric.clst.org/tech/usgeojson/
 
 I've filtered for various smaller regions such as
+
 OR_WA_ID_MT_WY.shp.zip
 northwestUS.shp.zip
 
@@ -27,9 +32,10 @@ northwestUS.shp.zip
 Lakes and rivers
 
 North_America_Lakes_and_Rivers.zip
+
 North_America_Lakes.zip
 
-This is hosted at ArcGIS.
+These are hosted at ArcGIS.
 
 I can't find the download button from web search at the moment.  My notes have:
 

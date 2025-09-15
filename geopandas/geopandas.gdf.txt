@@ -1,0 +1,58 @@
+GeoPandas uses dataframes like Pandas, with a twist.
+
+Pandas indexing uses both labels and standard numeric indexes.  Hence
+
+df.loc['col_name'] and df.iloc[idx]
+
+Another complication is the special geometry column.  Access this as either
+
+gdf['geometry']
+gdf.geometry
+
+Geometry contains shapely objects like LINESTRING,POLYGON,MULTIPOLYGON.
+
+In constructing a gdf, you might start with a Pandas df and say, a LineString (LS) and then do
+
+gdf = gpd.GeoDataFrame(df,
+    geometry=[LS],crs="EPSG:4326")
+
+Example:
+
+import geopandas as gpd
+gdf = gpd.read_file('nw5.shp.zip')
+geom = gdf.geometry
+
+The `type` of `geom` is
+<class 'geopandas.geoseries.GeoSeries'>
+
+In this case we have both POLYGON nad MULTIPOLYGON objects.
+
+>>> pg = geom.iloc[0]
+>>> type(pg)
+<class 'shapely.geometry.polygon.Polygon'>
+>>> pg.bounds
+(-124.552441, 41.991794, -116.463504, 46.271004)
+>>> pg.boundary
+<LINESTRING (-121.922 45.649, -121.908 45.654, -121.901 45.662, -121.902 45....>
+>>> pg.centroid
+<POINT (-120.555 43.937)>
+>>> pg.representative_point()
+<POINT (-120.515 44.139)>
+>>> pg.coords
+Traceback (most recent call last):
+..
+NotImplementedError: Component rings have coordinate sequences, but the polygon does not
+>>> 
+
+Even a POLYGON can have multiple component rings
+(for lakes).
+
+>>> inside = pg.interiors
+>>> type(inside)
+<class 'shapely.geometry.polygon.InteriorRingSequence'>
+
+Not quite sure how to work with these
+
+
+
+

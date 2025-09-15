@@ -44,6 +44,19 @@ Name: geometry, dtype: geometry
 L = [np[i].iloc[0] for i in range(len(np))]
 MP = MultiPoint(L)
 
+'''
+# I thought this a better way:
+
+X =  [float(p.x) for p in np]
+Y =  [float(p.y) for p in np]
+
+ FutureWarning: Calling float on a single element Series is deprecated and will raise a TypeError in the future. Use float(ser.iloc[0]) instead
+ 
+L = gpd.points_from_xy(X,Y)
+MP = MultiPoint(L)
+
+'''
+
 # construct a GeoDataFrame
 
 D = { 'name':['nearest_points'] }

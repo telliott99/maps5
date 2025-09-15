@@ -1,10 +1,14 @@
 ### A mapping project using geopandas
 
-The polished version which works is a Jupyter Lab notebook.
+This repo contains a Jupyter Lab notebook about a mapping project.  We use GeoPandas to make maps of rivers and lakes in the Pacific Northwest.  The result is [explore](explore.pdf).
 
-The html versions of notebooks don't display well on github, but as local copies they are great.  OTOH, the notebooks do display there, but need to be opened by `jupyter lab mynb.ipynb` to display locally.
+I made a record of what I tried as I went along, so much of what is here is rambling notes.  I saved it all, just in case.
 
-I made a record of what I tried as I went along, so much of what is here is just rambling notes.  I saved it all, just in case.
+#### Why `ipynb`, `html` *and* `pdf`:
+
+Locally, `html` versions of notebooks are a good way to display them, but on github, they do not render properly.  (To do:  figure out why).
+
+Notebooks *do* display nicely on github, but need to be opened by `jupyter lab mynb.ipynb` to display locally, which isn't convenient when just browsing.
 
 ### Notebooks
 
@@ -12,11 +16,10 @@ I made a record of what I tried as I went along, so much of what is here is just
 - missing points in [Pend Oreille](Pend_Oreille/Pend Oreille.ipynb)
 - Pandas [cheatsheet](pandas/pandas.df.ipynb)
 
-### Other points of note:
+#### Also:
 
-- Notes on the Lewis & Clark trail in the LC directory, including a map.
-
-- [shapely](shapely.pdf)
+- Notes on the Lewis & Clark trail [here](lewis_&_clark), including a map.
+- exploring [shapely](shapely.pdf)
 
 See [nearest_points](nearest.py) for an example of obtaining the two nearest points in a lake and a river, then extracting those points from what's returned, building a new GeoDataFrame, and plotting the results.
 

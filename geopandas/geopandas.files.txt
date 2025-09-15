@@ -1,0 +1,23 @@
+GeoPandas
+
+import geopandas as gpd
+
+Can read and write spatial data files in any number of formats.
+
+One way it does this is to use fiona
+https://pypi.org/project/fiona/
+
+The most common file types are shapefiles (.shp.zip) and geoJSON (.geojson).
+
+Reading and writing are as simple as:
+
+gdf = gpd.read_file(path)
+gdf.to_file(path, driver = 'ESRI Shapefile')
+
+https://geopandas.org/en/stable/docs/user_guide/io.html
+
+GeoPandas can read from urls
+GeoPandas can filter during the read, so only a subset of the data is actually loaded.
+
+For KML you need to tell fiona first (see lewis_and_clark).
+

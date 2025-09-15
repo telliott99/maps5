@@ -1,0 +1,46 @@
+The data for Hawaii can be obtained as
+
+import geopandas as gpd
+dbpath = '/Users/telliott/data/'
+gdf = gpd.read_file(dbpath+
+    'gz_2010_us_040_00_5m')
+gdf.to_file('hawaii.shp.zip',
+    driver = 'ESRI Shapefile')
+
+so then
+
+import geopandas as gpd
+import matplotlib.pyplot as plt
+
+dbpath = '/Users/telliott/data/'
+hawaii = gpd.read_file(dbpath+'hawaii.shp.zip')
+
+The strange thing about this data is it comes from a file built around States.  It's a single entry
+
+The Hawaii geometry is (ultimately) a MULTIPOLYGON with 9 items.  But the islands aren't named.
+
+Iterating through the islands isn't easy.  Since we ultimately want the boundaries as RINGS or LINESTRINGS or something:
+
+# 0 is the only valid index
+MP = hawaii.geometry.iloc[0]
+
+# MP is a MULTIPOLYGON
+islands = list(MP.geoms)
+
+There are 9 POLYGONS in islands.  They can be obtained simply by indexing into the list.
+
+p0 = islands[0]
+
+as a shapely POLYGON object, these guys have some neat methods like centroid
+
+one way to plot is to go back to geopandas
+
+L = [p.centroid for p in islands]
+gs = gpd.GeoSeries(L)
+gs.plot()
+plt.savefig('out.png')
+
+except, it's wrong.
+
+
+
