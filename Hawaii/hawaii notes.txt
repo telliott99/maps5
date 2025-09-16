@@ -1,46 +1,87 @@
-The data for Hawaii can be obtained as
+TL;DR
 
-import geopandas as gpd
-dbpath = '/Users/telliott/data/'
-gdf = gpd.read_file(dbpath+
-    'gz_2010_us_040_00_5m')
-gdf.to_file('hawaii.shp.zip',
-    driver = 'ESRI Shapefile')
+- obtain a MULTIPOLYGON by indexing
+MP = hawaii.geometry.iloc[0]
 
-so then
+- obtain individual island POLYGON by
+p = list(MP.geoms)[0]
 
-import geopandas as gpd
-import matplotlib.pyplot as plt
 
-dbpath = '/Users/telliott/data/'
-hawaii = gpd.read_file(dbpath+'hawaii.shp.zip')
+--------------
 
-The strange thing about this data is it comes from a file built around States.  It's a single entry
+Hawaii geometry is (ultimately) a MULTIPOLYGON with 9 items.  
 
-The Hawaii geometry is (ultimately) a MULTIPOLYGON with 9 items.  But the islands aren't named.
+Obtained from
+'gz_2010_us_040_00_5m'
 
-Iterating through the islands isn't easy.  Since we ultimately want the boundaries as RINGS or LINESTRINGS or something:
+But the islands aren't named.
+
+Iterating isn't easy.  Since we ultimately want the boundaries as RINGS or LINESTRINGS or something:
 
 # 0 is the only valid index
 MP = hawaii.geometry.iloc[0]
-
 # MP is a MULTIPOLYGON
+
+
+import geopandas as gpd
+import matplotlib.pyplot as plt
+gdf = gpd.read_file('/Users/telliott/data/gz_2010_us_040_00_5m')
+hawaii = gdf[gdf['NAME'] == 'Hawaii']
+
+
+>>> hawaii
+         GEO_ID  ...                                           geometry
+11  0400000US15  ...  MULTIPOLYGON (((-155.77823 20.24574, -155.7727...
+
+[1 rows x 6 columns]
+
+
+
+geo = hawaii.geometry
+MP = geo.iloc[0]
+
+
+>>> geo
+11    MULTIPOLYGON (((-155.77823 20.24574, -155.7727...
+Name: geometry, dtype: geometry
+>>> type(geo)
+<class 'geopandas.geoseries.GeoSeries'>
+>>> type(MP)
+<class 'shapely.geometry.multipolygon.MultiPolygon'>
+>>> 
+
+21.4384,-157.78958
+
+
 islands = list(MP.geoms)
+p0 = islands[0]
+
+
 
 There are 9 POLYGONS in islands.  They can be obtained simply by indexing into the list.
 
-p0 = islands[0]
-
 as a shapely POLYGON object, these guys have some neat methods like centroid
 
-one way to plot is to go back to geopandas
 
-L = [p.centroid for p in islands]
-gs = gpd.GeoSeries(L)
-gs.plot()
+>>> MP.geoms
+<shapely.geometry.base.GeometrySequence object at 0x109d3f100>
+>>> islands = list(MP.geoms)
+>>> p0 = islands[0]
+>>> p0
+<POLYGON ((-155.778 20.246, -155.773 20.245, -155.747 20.232, -155.737 20.22...>
+>>> type(pO)
+>>> type(p0)
+<class 'shapely.geometry.polygon.Polygon'>
+>>> 
+
+
+best way to plot is to go back to geopandas
+
+D = {'name': ['big island']}
+big_island = gpd.GeoDataFrame(
+    D, geometry=[p0], crs=hawaii.crs)
+
+
+ax = hawaii.boundary.plot(color='b')
+big_island.plot(ax=ax,color='b',alpha=0.25)
 plt.savefig('out.png')
-
-except, it's wrong.
-
-
-
