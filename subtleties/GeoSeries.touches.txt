@@ -1,0 +1,45 @@
+import or execute preliminary.py
+
+>>> OR.geometry.touches(ID.geometry,align=True)
+0    False
+2    False
+dtype: bool
+>>> OR.geometry.touches(ID.geometry,align=False)
+0    True
+dtype: bool
+>>> 
+
+An object is said to touch other if it has at least one point in common with other and its interior does not intersect with any part of the other. Overlapping features therefore do not touch.
+
+
+Geopandas.GeoSeries.touches in docs
+
+align
+bool | None (default None)
+If True, automatically aligns GeoSeries based on their indices. If False, the order of elements is preserved. None defaults to True.
+
+OR.geometry is a single row index 0
+ID.geometry  "               "    2
+
+so I think what this means is that *without* alignment we compare
+OR.iloc[0] w/ ID.iloc[0]
+OR.iloc[2] w/ ID.iloc[2]
+which are both false
+
+*with* alignment the row in ID is re-indexed to 0 and then
+the comparison returns True
+
+if we switch the columns around and
+redo the indexes from 0 to 5:
+
+rID = ID.reindex([2,0,1,3,4])
+rID.index=list(range(5))
+
+>>> OR.geometry.touches(rID.geometry,align=True)
+0     True
+1    False
+2    False
+3    False
+4    False
+dtype: bool
+>>> 

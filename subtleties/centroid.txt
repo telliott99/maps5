@@ -1,0 +1,70 @@
+import os
+import geopandas as gpd
+
+dbpath = os.path.expanduser('~') + '/data/'
+gdf = gpd.read_file(dbpath +
+    'OR_WA_ID_MT_WY.shp.zip')
+
+===========
+pain points
+===========
+
+area or centroid
+from a gdf, must first project to UTM crs
+
+crs = gdf.estimate_utm_crs()
+gs = gdf.to_crs(crs).centroid
+gs
+0      POINT (213692.33 4870841.492)
+1     POINT (238665.786 5253664.949)
+2      POINT (690424.829 4913523.58)
+3    POINT (1061341.021 5237534.104)
+4    POINT (1271560.142 4803987.639)
+dtype: geometry
+>>> 
+
+-------------
+coordinates from a centroid or any POINT
+
+>>> pt = gs.iloc[0]
+>>> pt
+<POINT (213692.33 4870841.492)>
+
+the big issue is whether you have a single object
+or a GeoSeries
+
+if the latter you get stuff like:
+
+>>> c = ID.to_crs(ID.estimate_utm_crs()).centroid
+>>> c
+2    POINT (690424.829 4913523.58)
+dtype: geometry
+>>> c.x
+2    690424.829446
+dtype: float64
+>>> type(c.x)
+<class 'pandas.core.series.Series'>
+>>> float(c.x)
+<python-input-22>:1: FutureWarning: Calling float on a single element Series is deprecated and will raise a TypeError in the future. Use float(ser.iloc[0]) instead
+690424.8294459414
+>>> 
+
+
+>>> list(c)
+[<POINT (690424.829 4913523.58)>]
+>>> c.to_list()
+[<POINT (690424.829 4913523.58)>]
+>>> c.iloc[0]
+<POINT (690424.829 4913523.58)>
+>>> type(c.iloc[0])
+<class 'shapely.geometry.point.Point'>
+>>> c.iloc[0].x
+690424.8294459414
+>>> type(c.iloc[0].x)
+<class 'float'>
+>>> 
+
+
+
+
+

@@ -1,0 +1,45 @@
+>>> import geopandas as gpd
+>>> import pandas as pd
+>>> 
+>>> a = [1,2,3]
+>>> s = pd.Series(a)
+>>> s
+0    1
+1    2
+2    3
+dtype: int64
+>>> s.iloc[0]
+np.int64(1)
+>>> type(s.iloc[0])
+<class 'numpy.int64'>
+>>> 
+
+so that's not so bad
+
+>>> from shapely import Point
+>>> a = [Point(1,1),Point(2,2)]
+>>> a
+[<POINT (1 1)>, <POINT (2 2)>]
+>>> type(a)
+<class 'list'>
+>>> gs = gpd.GeoSeries(a)
+>>> gs
+0    POINT (1 1)
+1    POINT (2 2)
+dtype: geometry
+>>> gs.iloc[0]
+<POINT (1 1)>
+>>> type(gs.iloc[0])
+<class 'shapely.geometry.point.Point'>
+>>> 
+
+
+and that's not so bad either
+
+*sometimes* when you do iloc you get a series object back
+
+call iloc after iloc after iloc
+and still have a series
+
+
+I did have trouble with this but can't replicate.

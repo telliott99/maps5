@@ -1,9 +1,10 @@
+more about basemaps
+
 general notebook for geopandas
 
 .cx
 .clip
 .sjoin
 
-nearest_points
 
 advanced guide

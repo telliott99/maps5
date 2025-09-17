@@ -1,0 +1,12 @@
+>>> OR.geometry.intersection(ID.geometry,align=False)
+0    MULTILINESTRING ((-116.91599 45.99541, -116.91...
+dtype: geometry
+>>> result = OR.geometry.intersection(ID.geometry,align=False)
+>>> result.plot()
+<Axes: >
+>>> plt.show()
+
+>>> result
+0    MULTILINESTRING ((-116.91599 45.99541, -116.91...
+dtype: geometry
+>>> 

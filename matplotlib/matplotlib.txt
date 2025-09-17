@@ -1,0 +1,65 @@
+matplotlib simplest example:
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.arange(0, 5, 0.1)
+y = np.sin(x)
+plt.plot(x, y)
+plt.show()
+
+Close the figure window and Python should come back.
+A very common approach is
+
+fig, ax = plt.subplots()
+ax.plot(x, y)
+
+ax is short for `axes`
+
+The Axes class represents one (sub-)plot in a figure. It contains the plotted data, axis ticks, labels, title, legend, etc. Its methods are the main interface for manipulating the plot.
+
+The subplots() call takes nrows,ncols as input.  If only one value is supplied, it is interpreted as ncols.  plt.subplots(2) stacks the two axes vertically
+
+ax is an array of axes if there is more than one subplot.
+
+fig is an object of the Figure class.
+
+A figure has or contains one or more axes.
+
+>>> fig,ax = plt.subplots(2)
+>>> fig.axes
+[<Axes: >, <Axes: >]
+
+fig.show does the same thing as plt.show()
+
+plt.subplots() can take other arguments, like
+
+>>> fig,ax = plt.subplots(figsize=(2,3))
+>>> fig.get_size_inches()
+array([2., 3.])
+>>> 
+
+A common thing to do is to set the x and y limits
+and to make the axes equal
+
+ax.axis('equal')
+ax.set(xlim=(xmin, xmax), ylim=(ymin, ymax))
+
+The limits can be set separately
+ax.set_xlim()  # can pass xmin= or xmax= or both
+
+------------------------
+
+Built-in colormaps
+
+for Hawaii I did
+islands_gs.plot(cmap='Set2')
+
+https://matplotlib.org/stable/users/explain/colors/colormaps.html#qualitative
+
+
+
+
+
+
+

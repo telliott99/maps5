@@ -21,3 +21,35 @@ GeoPandas can filter during the read, so only a subset of the data is actually l
 
 For KML you need to tell fiona first (see lewis_and_clark).
 
+import json
+with open('data.json', 'r') as file:
+    data = json.load(file)
+gdf = gpd.read_file(data, driver='GeoJSON')
+
+gdf.to_file(path, driver="GeoJSON")
+
+-----
+
+import geopandas as gpd
+import shapely
+
+geometry = shapely.LineString([[0,0],[1,1],[2,2]])
+D = {}
+gdf = gpd.GeoDataFrame(D, geometry=[geometry], crs='epsg:3857')
+> gdf['name'] = ['item1']
+gdf.to_file('out.geojson', driver="GeoJSON")
+
+{
+"type": "FeatureCollection",
+"name": "out",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "name": "item1" }, "geometry": { "type": "LineString", "coordinates": [ [ 0.0, 0.0 ], [ 1.0, 1.0 ], [ 2.0, 2.0 ] ] } }
+]
+}
+
+import json
+gdf = gpd.read_file('out.geojson')
+
+
+
