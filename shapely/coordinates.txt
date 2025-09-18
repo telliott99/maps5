@@ -1,0 +1,82 @@
+>>> import shapely
+>>> p = shapely.Point((1,2))
+>>> q = shapely.Point((1.5,3))
+>>> import geopandas as gpd
+>>> gs = gpd.GeoSeries([p,q])
+>>> gs
+0      POINT (1 2)
+1    POINT (1.5 3)
+dtype: geometry
+>>>
+
+>>> gs.x
+0    1.0
+1    1.5
+dtype: float64
+>>> type(gs.x)
+<class 'pandas.core.series.Series'>
+>>>
+
+
+>>> L = gpd.points_from_xy(gs.x,gs.y)
+>>> L
+<GeometryArray>
+[<POINT (1 2)>, <POINT (1.5 3)>]
+Length: 2, dtype: geometry
+>>> list(L)
+[<POINT (1 2)>, <POINT (1.5 3)>]
+>>> 
+
+The zip * trick:
+
+>>> L = [(1,1),(2,3)]
+>>> X,Y = zip(*L)
+>>> X
+(1, 2)
+>>> Y
+(1, 3)
+>>> 
+
+https://stackoverflow.com/questions/5917522/unzipping-and-the-operator
+
+
+
+
+>>> gpd.points_from_xy
+<function points_from_xy at 0x10dfbe0c0>
+>>> L2 = gpd.points_from_xy(X,Y)
+>>> L2
+<GeometryArray>
+[<POINT (1 1)>, <POINT (2 3)>]
+Length: 2, dtype: geometry
+>>>
+>>> list(L2)
+[<POINT (1 1)>, <POINT (2 3)>]
+
+
+
+
+
+>>> import shapely
+>>> pg = shapely.Polygon(L)
+>>> pg
+<POLYGON ((1 1, 1 2, 2 2, 2 1, 1 1))>
+>>> pg.coordinates
+Traceback (most recent call last):
+  File "<python-input-30>", line 1, in <module>
+    pg.coordinates
+AttributeError: 'Polygon' object has no attribute 'coordinates'
+>>> pg.coords
+Traceback (most recent call last):
+  File "<python-input-31>", line 1, in <module>
+    pg.coords
+  File "/Users/telliott/Programming/maps/lib/python3.13/site-packages/shapely/geometry/polygon.py", line 266, in coords
+    raise NotImplementedError(
+        "Component rings have coordinate sequences, but the polygon does not"
+    )
+NotImplementedError: Component rings have coordinate sequences, but the polygon does not
+>>> pg.boundary.coords
+<shapely.coords.CoordinateSequence object at 0x10f3e8440>
+>>> list(pg.boundary.coords)
+[(1.0, 1.0), (1.0, 2.0), (2.0, 2.0), (2.0, 1.0), (1.0, 1.0)]
+

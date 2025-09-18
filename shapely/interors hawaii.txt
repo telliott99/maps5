@@ -1,0 +1,31 @@
+import sys,os
+import geopandas as gpd
+import pandas as pd
+import matplotlib.pyplot as plt
+
+user = os.path.expanduser('~')
+dbpath = user + '/data/'
+
+
+fn = 'gz_2010_us_040_00_5m'
+
+gdf = gpd.read_file(dbpath+fn)
+
+sel = gdf['NAME'] == 'Hawaii'
+hawaii = gdf[sel]
+
+MP = hawaii.geometry.iloc[0]
+oahu = MP.geoms[8]
+
+Oahu has interior ring structure
+What is that?
+
+inner = oahu.interiors
+
+>>> dir(inner)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__module__', '__ne__', '__new__', '__next__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__', '_get_ring', '_index', '_length', '_ndim', '_parent']
+>>> inner._length
+0
+>>> 
+
+false alarm?

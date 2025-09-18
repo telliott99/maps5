@@ -11,6 +11,10 @@ plt.show()
 Close the figure window and Python should come back.
 A very common approach is
 
+Notice we feed a list of x and a list y rather than (x,y)
+
+----------
+
 fig, ax = plt.subplots()
 ax.plot(x, y)
 
@@ -29,10 +33,15 @@ A figure has or contains one or more axes.
 >>> fig,ax = plt.subplots(2)
 >>> fig.axes
 [<Axes: >, <Axes: >]
+>>> id(ax[0])
+4426472080
+>>> id(fig.axes[0])
+4426472080
+>>> 
 
 fig.show does the same thing as plt.show()
 
-plt.subplots() can take other arguments, like
+plt.subplots() can take other arguments, like figsize
 
 >>> fig,ax = plt.subplots(figsize=(2,3))
 >>> fig.get_size_inches()

@@ -1,7 +1,0 @@
-coords v. coordinates
-
-GeoSeries.get_coordinates()
-returns a DataFrame of floats
-
-does a gdf have a 
-gdf.geometry.x ??
