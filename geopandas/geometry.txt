@@ -1,3 +1,6 @@
+e.geometry and e['geometry'] give the same thing
+
+
 >>> from pre import *
 >>> gdf = gpd.read_file(dbpath + 'OR_WA_ID_MT_WY.shp.zip')
 >>> gdf

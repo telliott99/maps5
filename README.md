@@ -14,13 +14,11 @@ Notebooks *do* display nicely on github, but need to be opened by `jupyter lab m
 
 - [exploring geopandas](explore.ipynb)
 - missing points in [Pend Oreille](Pend_Oreille/Pend Oreille.ipynb)
-- Pandas [cheatsheet](pandas/pandas.df.ipynb)
+- Pandas [cheatsheet](pandas/pandas.ipynb)
 
 #### Also:
 
-- Notes on the Lewis & Clark trail [here](lewis_&_clark), including a map.
-- exploring [shapely](shapely.pdf)
+- Notes on the Lewis & Clark trail [here](LC), including a map.
+- exploring [shapely](shapely/explore_shapely.ipynb)
 
-See [nearest_points](nearest.py) for an example of obtaining the two nearest points in a lake and a river, then extracting those points from what's returned, building a new GeoDataFrame, and plotting the results.
-
-See [shapely.pdf](shapely.pdf) for an example of working with a `Coordinate Sequence`.  
+See [nearest_points](nearest_points/nearest.png) for an example of obtaining the two nearest points in a lake and a river, then extracting those points from what's returned, building a new GeoDataFrame, and plotting the results.

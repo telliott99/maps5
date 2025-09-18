@@ -1,65 +1,48 @@
+
 there is a useful thing called a 'representative_point'
 
-import geopandas as gpd
 
-dbpath = '/Users/telliott/Library/CloudStorage/Dropbox/maps5/lewis_clark/'
-fn = 'doc.kml'
-gdf = gpd.read_file(dbpath+fn,driver='LIBKML')
-
-e = gdf.iloc[0]
-print(type(e))
-
-<class 'pandas.core.series.Series'>
-
-print(e.representative_point())
-AttributeError: 'Series' object has no attribute 'representative_point'
-
->>> e.geometry
-<MULTILINESTRING Z ((-114.088 46.749 0, -114.085 46.748 0, -114.084 46.747 0...>
->>> e['geometry']
-<MULTILINESTRING Z ((-114.088 46.749 0, -114.085 46.748 0, -114.084 46.747 0...>
-
-well that's confusing.
-either one works
-
-
-coords = e.geometry['coordinates']
-TypeError: 'MultiLineString' object is not subscriptable
->>> geom.representative_point()
-<POINT Z (-113.176 47.005 0)>
+>>> import shapely
+>>> line = shapely.LineString([(1,1),(2,2),(4,4)])
+>>> line.centroid
+<POINT (2.5 2.5)>
+>>> line.representative_point()
+<POINT (2 2)>
 >>> 
 
-
-so we can get a representative point from the geometry
-
-we don't have to do this:
-
-from shapely.geometry import LineString
-geom = e['geometry']
-coords = geom['coordinates']
-gs = gpd.GeoSeries(LineString(coords))
-rep_point = gs.representative_point()
-
-actually, this worked before but not now, don't know why
+shapely has coords
+>>> line.coords
+<shapely.coords.CoordinateSequence object at 0x10c755550>
 
 
->>> rp = geom.representative_point()
->>> type(rp)
-<class 'shapely.geometry.point.Point'>
+>>> import geopandas as gpd
+>>> LS = gpd.GeoSeries(line)
 >>> 
 
+>>> LS.get_geometry(0)
+0    LINESTRING (1 1, 2 2, 4 4)
+dtype: geometry
+>>> LS.get_geometry(1)
+0    None
+dtype: geometry
 
-problem:
-so sometimes representative_point() gives a point!
+>>> LS.representative_point()
+0    POINT (2 2)
+dtype: geometry
+>>> LS.centroid
+0    POINT (2.5 2.5)
+dtype: geometry
+
+
+sometimes representative_point() gives a point
 
 and sometimes:
-rp is a shapely.coords.CoordinateSequence object
+rp is a shapely.coords.CoordinateSequence object!
 
 there may be more than one so
 rep_point[0]
 
-it has a coords attribute
-
+as a shapely object, it has a coords attribute
 
 https://github.com/shapely/shapely/issues/984
 so we want
@@ -88,6 +71,8 @@ gs = gpd.GeoSeries(
 >>> type(rep_point)
 <class 'geopandas.geoseries.GeoSeries'>
 >>>
+
+
 
 This one is not a shapely.coords.CoordinateSequence 
 But it is just as complicated
