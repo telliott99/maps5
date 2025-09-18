@@ -74,9 +74,6 @@ gs = gpd.GeoSeries(
 
 
 
-This one is not a shapely.coords.CoordinateSequence 
-But it is just as complicated
-
 >>> t = rep_point[0].coords[:][0]
 >>> t
 (1.0, 1.0)

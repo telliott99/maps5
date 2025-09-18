@@ -1,15 +1,13 @@
-GeoPandas has been separated from the
-geodatasets package.  
+GeoPandas has been separated recently from the geodatasets package.  
+Install with pip
 
-install with pip
 python -m pip install geodatasets
 
 import geodatasets
 
-the name, unfortunately, 
-conflicts with NCBI GEO DataSets.
+the name, unfortunately, conflicts with NCBI GEO DataSets.
 
-geodatasets.data.flatten().keys()
+What they call a Bunch, or a dict of dicts
 
 >>> for e in geodatasets.data.flatten().keys():
 ...     print(e)
@@ -74,17 +72,21 @@ abs.australia_states_territories
 naturalearth.land
 >>> 
 
+To see metadata for one of these datasets, you can do, for example:
 
 >>>> geodatasets.data['eea']['large_rivers']
 {'url': 'https://www.eea.europa.eu/data-and-maps/data/wise-large-rivers-and-large-lakes/zipped-shapefile-with-wise-large-rivers-vector-line/zipped-shapefile-with-wise-large-rivers-vector-line/at_download/file', 'license': 'ODC-by', 'attribution': 'European Environmental Agency', 'name': 'eea.large_rivers', 'description': 'Large rivers in Europe that have a catchment area large than 50,000 km2.', 'geometry_type': 'LineString', 'details': 'https://www.eea.europa.eu/data-and-maps/data/wise-large-rivers-and-large-lakes', 'nrows': 20, 'ncols': 3, 'hash': '97b37b781cba30c2292122ba2bdfe2e156a791cefbdfedf611c8473facc6be50', 'filename': 'wise_large_rivers.zip'}
 >>> 
 
+There is undoubtedly a way to get the data from within Python, and a place it will be stored locally until you want it again, but I just copied the url:
 
 https://www.eea.europa.eu/data-and-maps/data/wise-large-rivers-and-large-lakes/zipped-shapefile-with-wise-large-rivers-vector-line/zipped-shapefile-with-wise-large-rivers-vector-line/at_download/file
 
-returns
+and put it in the browser, which returns a file:
 
 wise_large_rivers.zip
+
+[Now I remember, geopandas has read_url]
 
 danube = gdf[gdf['NAME'] == 'Danube']
 crs = danube.crs
@@ -95,5 +97,5 @@ cx.add_basemap(ax,source =cx.providers.OpenTopoMap,crs=crs)
 
 plt.show()
 
-
+and that gives a map of the part of Europe where the Danube flows.
 

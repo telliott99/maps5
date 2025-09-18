@@ -1,7 +1,7 @@
 e.geometry and e['geometry'] give the same thing
 
 
->>> from pre import *
+>>> from do_imports import *
 >>> gdf = gpd.read_file(dbpath + 'OR_WA_ID_MT_WY.shp.zip')
 >>> gdf
         GEO_ID  ...                                           geometry
@@ -13,6 +13,7 @@ e.geometry and e['geometry'] give the same thing
 
 [5 rows x 6 columns]
 
+>>> geo = gdf.geometry
 >>> geo.count_geometries()
 0     1
 1    12
