@@ -1,3 +1,33 @@
+>>> import geopandas as gpd
+>>> import geodatasets
+>>> import matplotlib.pyplot as plt
+
+
+>>> earth = geodatasets.data['naturalearth']['land']
+>>> gdf = gpd.read_file(earth['url'])
+>>> gdf
+    featurecla  ...                                           geometry
+0         Land  ...  POLYGON ((-59.57209 -80.04018, -59.86585 -80.5...
+1         Land  ...  POLYGON ((-159.20818 -79.49706, -161.1276 -79....
+2         Land  ...  POLYGON ((-45.15476 -78.04707, -43.92083 -78.4...
+3         Land  ...  POLYGON ((-121.21151 -73.50099, -119.91885 -73...
+4         Land  ...  POLYGON ((-125.55957 -73.48135, -124.03188 -73...
+..         ...  ...                                                ...
+122       Land  ...  POLYGON ((51.13619 80.54728, 49.79368 80.41543...
+123       Land  ...  POLYGON ((99.93976 78.88094, 97.75794 78.7562,...
+124       Land  ...  POLYGON ((-87.02 79.66, -85.81435 79.3369, -87...
+125       Land  ...  POLYGON ((-68.5 83.10632, -65.82735 83.02801, ...
+126       Land  ...  POLYGON ((-27.10046 83.51966, -20.84539 82.726...
+
+[127 rows x 4 columns]
+>>> gdf.plot()
+<Axes: >
+>>> plt.show()
+
+And it works
+
+--------
+
 GeoPandas has been separated recently from the geodatasets package.  
 Install with pip
 
@@ -6,6 +36,17 @@ python -m pip install geodatasets
 import geodatasets
 
 the name, unfortunately, conflicts with NCBI GEO DataSets.
+
+--------------
+
+https://www.martinalarcon.org/2018-12-31-d-geopandas/
+
+unfortunately the 
+
+GeoDataFrame of quakes is not in that data
+
+
+--------------
 
 What they call a Bunch, or a dict of dicts
 

@@ -1,0 +1,48 @@
+rasterio reads and writes GeoTIFF and other raster formats
+it is a dependency of contextily along with
+
+mercantile
+numpy
+matplotlib
+pillow
+rasterio
+requests
+geopy
+joblib
+xyzservices
+
+https://rasterio.readthedocs.io/en/stable/
+
+"Before Rasterio there was one Python option for accessing the many different kind of raster data files used in the GIS field: the Python bindings distributed with the Geospatial Data Abstraction Library, GDAL."
+
+
+
+------
+
+Rasterio’s command line interface (CLI) is a program named “rio”.
+https://rasterio.readthedocs.io/en/stable/cli.html
+
+------
+
+I found an example file here
+https://github.com/mommermi/geotiff_sample
+
+sample.tif
+which I downloaded to the Desktop and then
+
+
+import rasterio
+dataset = rasterio.open('sample.tif')
+
+>>> dataset.crs
+CRS.from_wkt('PROJCS["WGS 84 / UTM zone 31N",GEOGCS["WGS
+...
+>>> dataset.bounds
+BoundingBox(left=590520.0, bottom=5780620.0, right=600530.0, top=5790630.0)
+>>> dataset.transform
+Affine(10.0, 0.0, 590520.0,
+       0.0, -10.0, 5790630.0)
+>>> 
+
+https://medium.com/@mommermiscience/dealing-with-geospatial-raster-data-in-python-with-rasterio-775e5ba0c9f5
+
