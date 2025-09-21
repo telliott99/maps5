@@ -1,0 +1,18 @@
+more about basemaps
+
+general notebook for geopandas
+
+.cx
+.clip
+.sjoin
+
+
+advanced guide
+
+https://geopandas.org/en/stable/gallery/index.html
+
+https://towardsdatascience.com/easily-plot-earthquakes-data-on-top-of-the-topographic-map-in-a-few-steps-c165673035b4/
+
+https://towardsdatascience.com/how-to-easily-merge-multiple-jupyter-notebooks-into-one-e464a22d2dc4/
+
+https://www.martinalarcon.org/2018-12-31-d-geopandas/

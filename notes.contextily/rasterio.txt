@@ -15,8 +15,6 @@ https://rasterio.readthedocs.io/en/stable/
 
 "Before Rasterio there was one Python option for accessing the many different kind of raster data files used in the GIS field: the Python bindings distributed with the Geospatial Data Abstraction Library, GDAL."
 
-
-
 ------
 
 Rasterio’s command line interface (CLI) is a program named “rio”.
@@ -30,9 +28,12 @@ https://github.com/mommermi/geotiff_sample
 sample.tif
 which I downloaded to the Desktop and then
 
+------
 
 import rasterio
 dataset = rasterio.open('sample.tif')
+
+GeoTIFF files know their crs and bounds
 
 >>> dataset.crs
 CRS.from_wkt('PROJCS["WGS 84 / UTM zone 31N",GEOGCS["WGS
@@ -45,4 +46,34 @@ Affine(10.0, 0.0, 590520.0,
 >>> 
 
 https://medium.com/@mommermiscience/dealing-with-geospatial-raster-data-in-python-with-rasterio-775e5ba0c9f5
+
+------
+
+I believe that geopandas caches tiles within but *not* between sessions.
+
+there is discussion on the web about caching tiles
+https://github.com/geopandas/contextily/issues/46
+which indicates it is implemented
+
+---------
+
+one can explicitly download tiles to local files
+https://contextily.readthedocs.io/en/latest/working_with_local_files.html
+
+import matplotlib.pyplot as plt
+import contextily as cx
+import rasterio
+import rasterio.plot
+
+def get():
+    w,s = -118.47,33.95
+    e,n = -118.43,33.99
+    img,ext = cx.bounds2raster(w,s,e,n,
+        'out.tif',ll=True)
+
+#get()
+
+with rasterio.open("out.tif") as r:
+    rasterio.plot.show(r)
+
 

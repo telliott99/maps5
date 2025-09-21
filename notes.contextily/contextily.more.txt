@@ -1,0 +1,58 @@
+saving a tile
+
+contextily.bounds2raster
+Take bounding box and zoom, and write tiles into a raster file in the Spherical Mercator CRS (EPSG:3857)
+
+contextily.bounds2img
+Take bounding box and zoom and return an image with all the tiles that compose the map and its Spherical Mercator extent.
+
+contextily.warp_tiles
+reproject (warp) a Web Mercator basemap into any CRS on-the-fly
+
+contextily.warp_img_transform
+Reproject (warp) an img with a given transform and s_crs into a different t_crs
+
+example
+
+import contextily as cx
+import matplotlib.pyplot as plt
+
+import rasterio
+import rasterio.plot
+
+w=-79.943470
+s=32.655284
+e=-79.937951
+n=32.657575
+
+img, ext = cx.bounds2raster(w,s,e,n,"folly.tif",ll=True)
+
+
+Note that, since our bounding box was expressed in lon/lat, 
+we pass ll=True so the function knows about it.
+
+with rasterio.open("folly.tif") as r:
+    rasterio.plot.show(r)
+
+
+
+
+
+
+
+different projection
+always stored in original CRS, Web Mercator
+
+
+
+with rasterio.open("cape_town.tif") as r:
+    rioshow(r)
+
+with rasterio.open("cape_town.tif") as r:
+    west, south, east, north = tuple(r.bounds)
+    cape_town_crs = r.crs
+bb_poly = box(west, south, east, north)
+bb_poly = geopandas.GeoDataFrame({"geometry": [bb_poly]},
+                                 crs=cape_town_crs
+                                )
+
