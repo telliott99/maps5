@@ -1,0 +1,2 @@
+We are not getting images in the html.
+Why not?

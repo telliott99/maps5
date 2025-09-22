@@ -1,0 +1,5 @@
+And indeed it is!
+
+https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
+
+says that we are re-projecting from EPSG:4326 to EPSG:3857.

@@ -112,7 +112,9 @@ divide = filter_and_crs(divide)
 
 #-----
 
-ax = states.boundary.plot(color='gray',lw=0.5)
+fig,ax = plt.subplots()
+
+states.boundary.plot(ax=ax,color='gray',lw=0.5)
 LoloNF.plot(ax=ax,color='lightgray')
 
 rivers.plot(ax=ax,color='b',lw=0.8,zorder=2)
@@ -123,6 +125,8 @@ for t in places.values():
     ax.scatter(t[0],t[1],s=5,color='k',zorder=3)
 
 divide.plot(ax=ax,color='orange',lw=0.8,zorder=2)
+
+ax.axis('equal')
 
 plt.savefig('LC_trail.out.png',dpi=300)
 

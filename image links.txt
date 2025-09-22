@@ -1,0 +1,24 @@
+For some reason, in the notebook a path like 
+<img src="../figs/0_0_0.png">
+
+works, but in the conversion to html the image is lost.
+
+Top-level links work
+<img src="0_0_0.png">
+
+What I discovered is that
+<img src="figs/0_0_0.png">
+
+also works.
+
+So it's the .. part that doesn't work for html.
+
+-----
+
+And another thing:
+
+<img src="../figs/0_0_0.png">
+works
+
+<img src='../figs/0_0_0.png'>
+does not

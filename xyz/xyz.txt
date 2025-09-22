@@ -1,0 +1,192 @@
+xyz
+x,y coords and then z for zoom
+
+OSM:
+https://tile.openstreetmap.org/7/63/42.png
+that is
+https://tile.openstreetmap.org/{z}/{x}/{y}.png
+
+the tiles are numbered from 1..
+the zoom is indexed from 0
+there are 2^z tiles in each row and column
+
+z = 0 : 1 tile 
+z = 1 : 2x2 = 4 tiles
+z = 2 : 4x4 = 16 tiles
+z = 10: 1024x1024 ≈ 10^6 tiles
+
+to calculate tile xy from lat,lon and zoom:
+
+e.g.
+zoom = 10
+tile_x = (LON + 180)/360 x 1024
+LON = [(tile_x/1024) x 360] - 180
+
+Kiawah contains LON -80.0
+at z = 6
+tile_x = 17
+tile_y = ?
+
+https://tile.openstreetmap.org/6/17/32.png  near Guayaquil
+32 is near equator at zoom 6
+
+https://tile.openstreetmap.org/6/17/28.png  Cayman Islands
+so they are numbered top to bottom, 
+
+https://tile.openstreetmap.org/6/17/25.png  Charleston in SE corner
+SE -> https://tile.openstreetmap.org/7/35/51.png
+SE -> https://tile.openstreetmap.org/8/71/103.png
+NW -> https://tile.openstreetmap.org/9/142/206.png
+SW -> https://tile.openstreetmap.org/10/284/413.png
+SE -> https://tile.openstreetmap.org/11/569/827.png (Folly Beach)
+NW -> https://tile.openstreetmap.org/12/1138/1654.png
+NW -> https://tile.openstreetmap.org/13/2276/3309.png
+
+Folly Beach is -79.94, 32.65
+
+tile_x = (LON + 180)/360 x 2^z
+       = 100.06/360 x 8192 = 2276 that's a match!
+
+tile_y = (90 - LAT)/180 x 2^z
+       = 57.35/180 x 8192 = 2610 that's way off!
+
+tile_y = (85 - LAT)/170 x 2^z
+       = 52.35/170 x 8192 = 2522 that's way off!
+
+
+The explanation is here
+https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
+
+the coverage for a tile depends on LAT, but not so for LON
+
+pseudocode
+n = 2 ^ zoom
+xtile = n * ((lon_deg + 180) / 360)
+ytile = n * (1 - (log(tan(lat_rad) + sec(lat_rad)) / π)) / 2
+
+log = ln(tan(lat_rad) + sec(lat_rad))
+delta = 1 - log/pi
+ytile = delta * 2^{z-1}
+
+(where log is ln)
+
+n = 2 ^ zoom
+lon_deg = xtile / n * 360.0 - 180.0
+lat_rad = arctan(sinh(π * (1 - 2 * ytile / n)))
+lat_deg = lat_rad * 180.0 / π
+
+convert to Python
+
+from math import *
+z = 13
+n = 2**z
+
+def f(LAT):
+    rad = radians(LAT)
+    s = tan(rad) + 1/cos(rad)
+    d = 1 - log(s)/pi
+    return d*2**(z-1)
+
+
+>>> f(32.65)
+3309.212860467827
+!!!!!!
+
+
+
+tiling schemes differ!
+may need to convert to the Mercator projection
+EPSG:3857
+
+
+
+
+At zoom = 11
+1 tile with about 
+0.75 deg LONG and LAT
+
+We should have 2**11 = 2048 tiles hoz and vert
+Resolution should be 360/2048 for LONG ≈ 0.175
+
+
+https://wiki.openstreetmap.org/wiki/Tiles
+has an example:
+
+https://tile.openstreetmap.org/7/63/42.png
+
+this is zoom level 7
+tile number 63,42
+     Coventry
+Bristol - London
+     Portsmouth
+
+
+https://tile.openstreetmap.org/8/126/84.png
+shows roughly, the NW corner of the previous one
+
+https://tile.openstreetmap.org/9/252/168.png
+
+https://tile.openstreetmap.org/10/504/336.png
+
+https://tile.openstreetmap.org/11/1008/672.png
+
+
+at zoom 8
+126/84 shows Worcester
+127/85 shows 
+
+https://tile.openstreetmap.org/8/127/85.png
+
+At zoom 8
+there should be 2^8 = 256  tiles altogether
+
+so 1/2 that is 128;
+128 and 129 should straddle LON 0
+
+
+
+
+
+showing tiles v. bbox size
+
+https://tools.geofabrik.de/calc/#type=geofabrik_standard&bbox=11.932105,51.796687,14.624001,53.399081
+
+showing computation of tile x/y
+
+
+
+
+
+
+
+download a basemap to a local file and then plot it:
+
+source = 'virginia.tiff'
+_ = cx.bounds2raster(*db.total_bounds, zoom=6, source=source)
+ax = db.plot(alpha=0.5, color='k', figsize=(6, 6))
+cx.add_basemap(ax, source=source)
+plt.show()
+
+
+
+tile numbering
+
+https://www.thunderforest.com/docs/tile-numbering/
+
+The tiles are numbered as {z}/{x}/{y}, where z is zoom, x is the tile number from left to right, and y is the tile number from top to bottom.
+
+top level is zoom 0 with a single tile for the whole world
+0/0/0
+
+so at zoom level 10 there should be 2^10 = 1024 in each direction
+a little less than 3 per degree of LON/LAT
+
+Available zoom levels are 0-22
+
+how to convert LON/LAT to tile number?
+
+
+contextily tutorial
+https://contextily.readthedocs.io/en/stable/intro_guide.html
+
+
