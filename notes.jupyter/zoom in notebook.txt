@@ -1,0 +1,14 @@
+The notebook (in Safari) has its own menu bar.
+You can get it into a state where this menu bar is obscured.
+
+1.png
+
+Quitting and relaunching will not fix it.
+
+The issue is the zoom level.
+Its counterintuitive, but the zoom level is too small.
+It must be increased back to 100% or greater.
+
+Sometimes CMD+ fails to change the zoom.  Sometimes it works.
+
+2.png shows where to go in the real menu to change the zoom level for the web server localhost.

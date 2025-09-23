@@ -7612,13 +7612,128 @@ a.anchor-link {
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=888ee086-c67e-42f1-8650-ae933aae4985">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Quite a few of the US states are MultiPolygon objects.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=26fa881e-a1b2-4492-9539-4f43ca91c16b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">sel</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">'MultiPolygon'</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="n">sel</span><span class="p">][</span><span class="s1">'NAME'</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>['Alabama',
+ 'Alaska',
+ 'California',
+ 'Delaware',
+ 'Florida',
+ 'Hawaii',
+ 'Kentucky',
+ 'Louisiana',
+ 'Maine',
+ 'Maryland',
+ 'Massachusetts',
+ 'Michigan',
+ 'Mississippi',
+ 'New York',
+ 'North Carolina',
+ 'Ohio',
+ 'Rhode Island',
+ 'Texas',
+ 'Virginia',
+ 'Washington',
+ 'Wisconsin',
+ 'Puerto Rico']</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=0faf0e9b-3993-4a47-9e20-b1af449f91dc">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">sel</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s1">'MultiPolygon'</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="n">sel</span><span class="p">][</span><span class="s1">'NAME'</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>['Arizona',
+ 'Arkansas',
+ 'Colorado',
+ 'Connecticut',
+ 'District of Columbia',
+ 'Georgia',
+ 'Idaho',
+ 'Illinois',
+ 'Indiana',
+ 'Iowa',
+ 'Kansas',
+ 'Minnesota',
+ 'Missouri',
+ 'Montana',
+ 'Nebraska',
+ 'Nevada',
+ 'New Hampshire',
+ 'New Jersey',
+ 'New Mexico',
+ 'North Dakota',
+ 'Oklahoma',
+ 'Oregon',
+ 'Pennsylvania',
+ 'South Carolina',
+ 'South Dakota',
+ 'Tennessee',
+ 'Utah',
+ 'Vermont',
+ 'West Virginia',
+ 'Wyoming']</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1f0e98f3-5f09-46bc-922d-6967e2671dde">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>So there is only one row of data for Hawaii, but 9 islands.  There may be more sophisticated ways to do this, but one approach is as follows.</p>
+<h3 id="Getting-to-the-islands">Getting to the islands<a class="anchor-link" href="#Getting-to-the-islands">¶</a></h3><p>So there is only one row of data for Hawaii, but 9 islands.  There may be more sophisticated ways to do this, but one approach is as follows.</p>
 <p><code>hawaii.geometry</code> is a GeoSeries.  We can index into it with <code>.iloc</code>.</p>
 </div>
 </div>
@@ -7628,7 +7743,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">MP</span> <span class="o">=</span> <span class="n">hawaii</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -7654,7 +7769,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">MP</span><span class="p">)</span>
@@ -7668,7 +7783,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>shapely.geometry.multipolygon.MultiPolygon</pre>
 </div>
@@ -7680,7 +7795,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pg</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">geoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -7703,7 +7818,7 @@ a.anchor-link {
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 <div class="jp-RenderedSVG jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="image/svg+xml" tabindex="0">
 <img alt="No description has been provided for this image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTAwLjAiIGhlaWdodD0iMTAwLjAiIHZpZXdCb3g9Ii0xNTYuMTE4NTI3Mjc0NTExMTQgMTguODYzMzAyODYyNzEwNjcgMS4zNjMzMTE1NDkwMjIyNTY1IDEuNDYyNDA4NDExODAwNDYwMyIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pbllNaW4gbWVldCI+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMCwzOS4xODkwMTQxMzcyMjE4KSI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSIjNjZjYzk5IiBzdHJva2U9IiM1NTU1NTUiIHN0cm9rZS13aWR0aD0iMC4wMjkyNDgxNjgyMzYwMDkyMDciIG9wYWNpdHk9IjAuNiIgZD0iTSAtMTU1Ljc3ODIzNCwyMC4yNDU3NDI5OTk5OTk5OTcgTCAtMTU1Ljc3MjczNCwyMC4yNDU0MDkgTCAtMTU1Ljc0Njg5MywyMC4yMzIzMjUgTCAtMTU1LjczNzAwNCwyMC4yMjI3NzMgTCAtMTU1LjczNTgyMTk5OTk5OTk4LDIwLjIxMjQxNyBMIC0xNTUuNzMyNzA0LDIwLjIwNTM5MiBMIC0xNTUuNjUzOTY2LDIwLjE2NzM2IEwgLTE1NS42MzAzODIsMjAuMTQ2OTE1OTk5OTk5OTk3IEwgLTE1NS42MjQ1NjUsMjAuMTQ1OTEwOTk5OTk5OTk4IEwgLTE1NS42MDc3OTcsMjAuMTM3OTg3IEwgLTE1NS42MDA5MDksMjAuMTI2NTczIEwgLTE1NS41OTgwMzMsMjAuMTI0NTM5IEwgLTE1NS41OTA5MjMsMjAuMTIyNDk3IEwgLTE1NS41ODE2OCwyMC4xMjM2MTcgTCAtMTU1LjU2ODM2OCwyMC4xMzA1NDQ5OTk5OTk5OTggTCAtMTU1LjU1ODkzMywyMC4xMzE1NyBMIC0xNTUuNTIzNjYxLDIwLjEyMDAyNzk5OTk5OTk5OCBMIC0xNTUuNTE2Nzk1LDIwLjExNTIzIEwgLTE1NS41MDI1NjEwMDAwMDAwMSwyMC4xMTQxNTUgTCAtMTU1LjQ2ODIxMSwyMC4xMDQyOTU5OTk5OTk5OTggTCAtMTU1LjQ0Mzk1NywyMC4wOTUzMTggTCAtMTU1LjQwNTQ1OSwyMC4wNzg3NzIgTCAtMTU1LjQwMjQsMjAuMDc1NTQwOTk5OTk5OTk4IEwgLTE1NS4zODc1NzgsMjAuMDY3MTE4OTk5OTk5OTk4IEwgLTE1NS4zMzAyMSwyMC4wMzg1MTcgTCAtMTU1LjI5NTQ4LDIwLjAyNDQzOCBMIC0xNTUuMjgyNjI5LDIwLjAyMTk2OSBMIC0xNTUuMjcwMzE1OTk5OTk5OTgsMjAuMDE0NTI1IEwgLTE1NS4yNDA5MzI5OTk5OTk5OCwxOS45OTAxNzMgTCAtMTU1LjIwNDQ4NiwxOS45Njk0MzggTCAtMTU1LjE5NDU5MywxOS45NTgzNjggTCAtMTU1LjE3OTkzOSwxOS45NDkzNzIgTCAtMTU1LjE0OTIxNSwxOS45MjI4NzE5OTk5OTk5OTggTCAtMTU1LjE0NDM5NCwxOS45MjA1MjMgTCAtMTU1LjEzMTIzNSwxOS45MDY4MDA5OTk5OTk5OTggTCAtMTU1LjEyNDYxOCwxOS44OTcyODggTCAtMTU1LjEyMTc1LDE5Ljg4NjA5ODk5OTk5OTk5OCBMIC0xNTUuMTA3NTQxLDE5Ljg3MjQ2NyBMIC0xNTUuMDk4NzE2LDE5Ljg2NzgxMSBMIC0xNTUuMDk1MDMyLDE5Ljg2Nzg4MTk5OTk5OTk5OCBMIC0xNTUuMDg2MzQxLDE5Ljg1NTM5OSBMIC0xNTUuMDg0MzU3LDE5Ljg0OTczNiBMIC0xNTUuMDg1NjczOTk5OTk5OTgsMTkuODM4NTgzOTk5OTk5OTk3IEwgLTE1NS4wODg5NzksMTkuODI2NjU2IEwgLTE1NS4wOTQ0MTQsMTkuODE0OTA5OTk5OTk5OTk4IEwgLTE1NS4wOTIwNywxOS43OTk0MDkgTCAtMTU1LjA5MTIxNiwxOS43NzYzNjc5OTk5OTk5OTggTCAtMTU1LjA5MzUxNywxOS43NzE4MzIgTCAtMTU1LjA5MzM4NywxOS43Mzc3NTEgTCAtMTU1LjA4NzExOCwxOS43MjgwMTMgTCAtMTU1LjA3OTQyNiwxOS43MjYxOTMgTCAtMTU1LjA2Mzk3MiwxOS43Mjg5MTcgTCAtMTU1LjA0NTM4MiwxOS43Mzk4MjQgTCAtMTU1LjAwNjQyMjk5OTk5OTk4LDE5LjczOTI4NiBMIC0xNTQuOTk3Mjc4LDE5LjcyODU3OTk5OTk5OTk5NyBMIC0xNTQuOTg3MTY4LDE5LjcwODUyNCBMIC0xNTQuOTgxMTAyLDE5LjY5MDY4NyBMIC0xNTQuOTg0NzE4LDE5LjY3MjE2MSBMIC0xNTQuOTgzNzc4LDE5LjY0MTY0NyBMIC0xNTQuOTc0MzQyLDE5LjYzMzIwMSBMIC0xNTQuOTYzOTMzLDE5LjYyNzYwNSBMIC0xNTQuOTUwMzU5LDE5LjYyNjQ2MSBMIC0xNTQuOTQ3ODc0LDE5LjYyNDI1IEwgLTE1NC45NDc3MTgsMTkuNjIxOTQ3IEwgLTE1NC45NTEwMTQsMTkuNjEzNjE0IEwgLTE1NC45NDcxMDYsMTkuNjA0ODU1OTk5OTk5OTk4IEwgLTE1NC45MzM5NCwxOS41OTc1MDQ5OTk5OTk5OTggTCAtMTU0LjkyODIwNSwxOS41OTI3MDIgTCAtMTU0LjkyNDQyMiwxOS41ODY1NTMgTCAtMTU0LjkwMzU0MiwxOS41NzA2MjIgTCAtMTU0Ljg3NSwxOS41NTY3OTcgTCAtMTU0Ljg1MjYxOCwxOS41NDkxNzIgTCAtMTU0LjgzNzM4NCwxOS41MzgzNTM5OTk5OTk5OTggTCAtMTU0LjgyNjczMiwxOS41Mzc2MjYgTCAtMTU0LjgxNDQxNywxOS41MzAwODk5OTk5OTk5OTggTCAtMTU0LjgwOTU2MSwxOS41MjIzNzcgTCAtMTU0LjgwOTM3OSwxOS41MTkwODU5OTk5OTk5OTggTCAtMTU0LjgyMjk2OCwxOS40ODEyODk5OTk5OTk5OTggTCAtMTU0LjgzODU0NSwxOS40NjM2NDIgTCAtMTU0Ljg2ODU0LDE5LjQzODEyNiBMIC0xNTQuODg3ODE2OTk5OTk5OTgsMTkuNDI2NDI1IEwgLTE1NC45Mjg3NzE5OTk5OTk5OCwxOS4zOTc2NDU5OTk5OTk5OTggTCAtMTU0Ljk0NDE4NSwxOS4zODE4NTIgTCAtMTU0Ljk2NDYxOSwxOS4zNjU2NDU5OTk5OTk5OTggTCAtMTU0Ljk4MDg2MSwxOS4zNDkyOTA5OTk5OTk5OTcgTCAtMTU1LjAyMDUzNywxOS4zMzEzMTcgTCAtMTU1LjA2MTcyOSwxOS4zMTY2MzYgTCAtMTU1LjExMzI3MiwxOS4yOTA2MTMgTCAtMTU1LjEzMzcsMTkuMjc2MDk5IEwgLTE1NS4xNTk2MzQ5OTk5OTk5OCwxOS4yNjgzNzUgTCAtMTU1LjE3MjQxMywxOS4yNjkwNiBMIC0xNTUuMTg3NDI3LDE5LjI2NjE1NiBMIC0xNTUuMTk2MjYsMTkuMjYxMjk1IEwgLTE1NS4yMDU4OTIsMTkuMjYwOTA3IEwgLTE1NS4yNDM5NjEsMTkuMjcxMzEzIEwgLTE1NS4yNjQ2MTg5OTk5OTk5OCwxOS4yNzQyMTMgTCAtMTU1LjI5Njc2MSwxOS4yNjYyODkgTCAtMTU1LjMwMzgwOCwxOS4yNjE4MzQ5OTk5OTk5OTggTCAtMTU1LjMxMzM3LDE5LjI1MDY5OCBMIC0xNTUuMzQxMjY4LDE5LjIzNDAzOSBMIC0xNTUuMzQ5MTQ4LDE5LjIxNzc1NTk5OTk5OTk5OCBMIC0xNTUuMzYwNjMxLDE5LjIwODkzIEwgLTE1NS4zNzg2MzgsMTkuMjAyNDM0OTk5OTk5OTk4IEwgLTE1NS4zOTA3MDEsMTkuMjAxMTcxIEwgLTE1NS40MTczNjksMTkuMTg3ODU4IEwgLTE1NS40MjcwOTMsMTkuMTc5NTQ2IEwgLTE1NS40MzI1MTksMTkuMTcwNjIzIEwgLTE1NS40NTM1MTYsMTkuMTUxOTUxOTk5OTk5OTk4IEwgLTE1NS40NjU2NjMsMTkuMTQ2OTY0IEwgLTE1NS41MDUyODEsMTkuMTM3OTA4IEwgLTE1NS41MTQ3NCwxOS4xMzI1MDA5OTk5OTk5OTggTCAtMTU1LjUxMjE0LDE5LjEyODE3Mzk5OTk5OTk5OCBMIC0xNTUuNTEyMTM3LDE5LjEyNDI5NTk5OTk5OTk5OCBMIC0xNTUuNTE5NjUyLDE5LjExNzAyNDk5OTk5OTk5OCBMIC0xNTUuNTI2MTM2LDE5LjExNTg4OSBMIC0xNTUuNTI4OTAyLDE5LjExMzcwOTk5OTk5OTk5OCBMIC0xNTUuNTQ0ODA2LDE5LjA5MTA1ODk5OTk5OTk5OCBMIC0xNTUuNTUxMTI5LDE5LjA4ODc4IEwgLTE1NS41NTc4MTcsMTkuMDgyMTMgTCAtMTU1LjU1NTMyNiwxOS4wNjkzNzcgTCAtMTU1LjU1NTE3NzAwMDAwMDAxLDE5LjA1MzkzMiBMIC0xNTUuNTU3MzcxLDE5LjA0NjU2NDk5OTk5OTk5OCBMIC0xNTUuNTY2NDQ1OTk5OTk5OTgsMTkuMDMyNTMxIEwgLTE1NS41NzY1OTksMTkuMDI3NDExOTk5OTk5OTk4IEwgLTE1NS41ODE5MDMsMTkuMDIyMjQgTCAtMTU1LjU5NjAzMiwxOC45OTg4MzI5OTk5OTk5OTggTCAtMTU1LjU5NjUyMSwxOC45ODA2NTM5OTk5OTk5OTggTCAtMTU1LjYwMTg2NiwxOC45NzE1NzIgTCAtMTU1LjYxMzk2NiwxOC45NzAzOTkgTCAtMTU1LjYyNTI1NiwxOC45NjE5NTEgTCAtMTU1LjYyNSwxOC45NTk5MzQgTCAtMTU1LjYzODA1NCwxOC45NDE3MjMgTCAtMTU1LjY1ODQ4NTk5OTk5OTk4LDE4LjkyNDgzNDk5OTk5OTk5OCBMIC0xNTUuNjcyMDA1MzQ3MDYsMTguOTE3NDY2MTM3MjIxNzk4IEwgLTE1NS42ODE4MjQ4MTA5NTUwMiwxOC45MTg2OTM1NzEzOTgwMDIgTCAtMTU1LjY4NzcxNjQ5MTE5NSwxOC45MjMzNTc4MTc0NjIgTCAtMTU1LjY5MDE3MTM1NDc5MSwxOC45MzIxOTUzMjgzMDc5MDIgTCAtMTU1LjY5MzExNzE5NDkxMTAzLDE4Ljk0MDU0MTg4NjQxNDkgTCAtMTU1LjcyNjA0MywxOC45Njk0MzcgTCAtMTU1Ljc2MzU5OCwxOC45ODE4MzcgTCAtMTU1LjgwNjEwOSwxOS4wMTM5NjY5OTk5OTk5OTcgTCAtMTU1Ljg1Mzk0MzAwMDAwMDAyLDE5LjAyMzc2MTk5OTk5OTk5OCBMIC0xNTUuODgxNTUsMTkuMDM2NjQ0IEwgLTE1NS44ODQwNzcsMTkuMDM5MjY1OTk5OTk5OTk4IEwgLTE1NS44ODYyNzgsMTkuMDU1NzYgTCAtMTU1LjkwMzY5MywxOS4wODA3NzY5OTk5OTk5OTggTCAtMTU1LjkwODM1NSwxOS4wODExMzggTCAtMTU1LjkyMTM4OSwxOS4xMjExODMgTCAtMTU1LjkxNzI5MiwxOS4xNTU5NjMgTCAtMTU1LjkwMzMzOSwxOS4yMTc3OTIgTCAtMTU1LjkwNDkxLDE5LjIzMDE0NyBMIC0xNTUuOTAyNTY0OTk5OTk5OTgsMTkuMjU4NDI2OTk5OTk5OTk4IEwgLTE1NS44OTU0MzUsMTkuMjc0NjM5IEwgLTE1NS44OTA4NDIsMTkuMjk4OTA0OTk5OTk5OTk4IEwgLTE1NS44ODczNTYsMTkuMzM3MTAxIEwgLTE1NS44ODg3MDEsMTkuMzQ4MDMxIEwgLTE1NS44OTg3OTIwMDAwMDAwMSwxOS4zNzc5ODM5OTk5OTk5OTggTCAtMTU1LjkxMzg0OSwxOS40MDExMDcgTCAtMTU1LjkwOTA4NywxOS40MTU0NTQ5OTk5OTk5OTggTCAtMTU1LjkyMTcwNywxOS40MzA1NSBMIC0xNTUuOTI0MjY4OTk5OTk5OTgsMTkuNDM4NzkzOTk5OTk5OTk4IEwgLTE1NS45MjUxNjYsMTkuNDY4MDgwOTk5OTk5OTk4IEwgLTE1NS45MjI2MDksMTkuNDc4NjExIEwgLTE1NS45MjQxMjQsMTkuNDgxNDA2IEwgLTE1NS45MzA1MjMsMTkuNDg0OTIxIEwgLTE1NS45MzU2NDEsMTkuNDg1NjI4IEwgLTE1NS45MzY0MDI5OTk5OTk5OCwxOS40ODE5MDQ5OTk5OTk5OTggTCAtMTU1LjkzOTE0NSwxOS40ODE1NzY5OTk5OTk5OTggTCAtMTU1Ljk1MTQ5LDE5LjQ4NjY0OSBMIC0xNTUuOTUyODk3LDE5LjQ4ODgwNSBMIC0xNTUuOTUzNjYzLDE5LjUxMDAwMjk5OTk5OTk5OCBMIC0xNTUuOTYwNDU3LDE5LjU0NjYxMiBMIC0xNTUuOTYyMjY0LDE5LjU1MTc3OSBMIC0xNTUuOTY1MjExLDE5LjU1NDc0NSBMIC0xNTUuOTY5MzUsMTkuNTU1OTYzIEwgLTE1NS45NzA5NjksMTkuNTg2MzI3OTk5OTk5OTk4IEwgLTE1NS45NzgyMDYsMTkuNjA4MTU5IEwgLTE1NS45OTc3MjgsMTkuNjQyODE2IEwgLTE1Ni4wMjg5ODE5OTk5OTk5OCwxOS42NTAwOTggTCAtMTU2LjAzMjkyOCwxOS42NTM5MDQ5OTk5OTk5OTggTCAtMTU2LjAzNDk5Mzk5OTk5OTk4LDE5LjY1OTM2IEwgLTE1Ni4wMzMzMjYsMTkuNjY5MjMgTCAtMTU2LjAyNzQyNywxOS42NzIxNTQgTCAtMTU2LjAyOTI4MSwxOS42Nzg5MDggTCAtMTU2LjAzNjA3OSwxOS42OTAyNTE5OTk5OTk5OTcgTCAtMTU2LjA0Nzk2LDE5LjY5ODkzOCBMIC0xNTYuMDUxNjUyLDE5LjcwMzY0OSBMIC0xNTYuMDUyNDg1LDE5LjcxODY2NyBMIC0xNTYuMDY0MzY0LDE5LjczMDc2NiBMIC0xNTYuMDU3MjIsMTkuNzQyNTM1OTk5OTk5OTk4IEwgLTE1Ni4wNTIzMTUsMTkuNzU2ODM2IEwgLTE1Ni4wNDk2NTA5OTk5OTk5OCwxOS43ODA0NTIgTCAtMTU2LjAyMTczMiwxOS44MDIyMDAwMDAwMDAwMDMgTCAtMTU2LjAwNjI2Njk5OTk5OTk4LDE5LjgxNzU4IEwgLTE1NS45ODI4MjEsMTkuODQ1NjUxIEwgLTE1NS45NzY2NTEsMTkuODUwNTMgTCAtMTU1Ljk2NDgxNjk5OTk5OTk4LDE5Ljg1NTE4MyBMIC0xNTUuOTQ5MjUxLDE5Ljg1NzAzNCBMIC0xNTUuOTQ1Mjk2OTk5OTk5OTgsMTkuODUzNDQzIEwgLTE1NS45NDAzMTEsMTkuODUyMzA0OTk5OTk5OTk4IEwgLTE1NS45MjU4NDMsMTkuODU4OTI4IEwgLTE1NS45MjY5MzgsMTkuODcwMjIxIEwgLTE1NS45MjU0OSwxOS44NzUgTCAtMTU1LjkxNTY2MiwxOS44ODcxMjYgTCAtMTU1LjkwMTk4NywxOS45MTIwODEgTCAtMTU1Ljg5NDA5ODk5OTk5OTk4LDE5LjkyMzEzNSBMIC0xNTUuODk0NDc0LDE5LjkyNjkyNyBMIC0xNTUuODkyNTMzMDAwMDAwMDEsMTkuOTMyMTYxOTk5OTk5OTk4IEwgLTE1NS44NjY5MTksMTkuOTU0MTcyIEwgLTE1NS44NTY1ODgsMTkuOTY4ODg1IEwgLTE1NS44NDA3MDgsMTkuOTc2OTUyIEwgLTE1NS44Mzg2OTE5OTk5OTk5OCwxOS45NzU1MjcgTCAtMTU1LjgzNTMxMiwxOS45NzYwNzc5OTk5OTk5OTggTCAtMTU1LjgzMTk0OCwxOS45ODI3NzUgTCAtMTU1LjgyODk2NDk5OTk5OTk4LDE5Ljk5NTU0MiBMIC0xNTUuODI1NDczLDIwLjAyNTk0NCBMIC0xNTUuODI4MTgyLDIwLjAzNTQyNCBMIC0xNTUuODUwMzg1LDIwLjA2MjUwNiBMIC0xNTUuODY2OTMxLDIwLjA3ODY1MTk5OTk5OTk5OCBMIC0xNTUuODg0MTksMjAuMTA2NzQ5OTk5OTk5OTk4IEwgLTE1NS44OTkxNDksMjAuMTQ1NzI4IEwgLTE1NS45MDYwMzUsMjAuMjA1MTU3IEwgLTE1NS45MDE0NTIsMjAuMjM1Nzg3IEwgLTE1NS44OTA2NjMsMjAuMjU1MjQgTCAtMTU1Ljg4MjYzMSwyMC4yNjMwMjYgTCAtMTU1Ljg3MzkyMSwyMC4yNjc3NDQgTCAtMTU1Ljg1MzI5MywyMC4yNzE1NDggTCAtMTU1LjgxMTQ1OSwyMC4yNjAzMiBMIC0xNTUuNzgzMjQyLDIwLjI0NjM5NSBMIC0xNTUuNzc4MjM0LDIwLjI0NTc0Mjk5OTk5OTk5NyB6IiAvPjwvZz48L3N2Zz4="/>
 </div>
@@ -7726,7 +7841,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">shapely</span><span class="o">.</span><span class="n">get_geometry</span><span class="p">(</span><span class="n">MP</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
@@ -7740,7 +7855,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 <div class="jp-RenderedSVG jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="image/svg+xml" tabindex="0">
 <img alt="No description has been provided for this image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTAwLjAiIGhlaWdodD0iMTAwLjAiIHZpZXdCb3g9Ii0xNTYuMTE4NTI3Mjc0NTExMTQgMTguODYzMzAyODYyNzEwNjcgMS4zNjMzMTE1NDkwMjIyNTY1IDEuNDYyNDA4NDExODAwNDYwMyIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pbllNaW4gbWVldCI+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMCwzOS4xODkwMTQxMzcyMjE4KSI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSIjNjZjYzk5IiBzdHJva2U9IiM1NTU1NTUiIHN0cm9rZS13aWR0aD0iMC4wMjkyNDgxNjgyMzYwMDkyMDciIG9wYWNpdHk9IjAuNiIgZD0iTSAtMTU1Ljc3ODIzNCwyMC4yNDU3NDI5OTk5OTk5OTcgTCAtMTU1Ljc3MjczNCwyMC4yNDU0MDkgTCAtMTU1Ljc0Njg5MywyMC4yMzIzMjUgTCAtMTU1LjczNzAwNCwyMC4yMjI3NzMgTCAtMTU1LjczNTgyMTk5OTk5OTk4LDIwLjIxMjQxNyBMIC0xNTUuNzMyNzA0LDIwLjIwNTM5MiBMIC0xNTUuNjUzOTY2LDIwLjE2NzM2IEwgLTE1NS42MzAzODIsMjAuMTQ2OTE1OTk5OTk5OTk3IEwgLTE1NS42MjQ1NjUsMjAuMTQ1OTEwOTk5OTk5OTk4IEwgLTE1NS42MDc3OTcsMjAuMTM3OTg3IEwgLTE1NS42MDA5MDksMjAuMTI2NTczIEwgLTE1NS41OTgwMzMsMjAuMTI0NTM5IEwgLTE1NS41OTA5MjMsMjAuMTIyNDk3IEwgLTE1NS41ODE2OCwyMC4xMjM2MTcgTCAtMTU1LjU2ODM2OCwyMC4xMzA1NDQ5OTk5OTk5OTggTCAtMTU1LjU1ODkzMywyMC4xMzE1NyBMIC0xNTUuNTIzNjYxLDIwLjEyMDAyNzk5OTk5OTk5OCBMIC0xNTUuNTE2Nzk1LDIwLjExNTIzIEwgLTE1NS41MDI1NjEwMDAwMDAwMSwyMC4xMTQxNTUgTCAtMTU1LjQ2ODIxMSwyMC4xMDQyOTU5OTk5OTk5OTggTCAtMTU1LjQ0Mzk1NywyMC4wOTUzMTggTCAtMTU1LjQwNTQ1OSwyMC4wNzg3NzIgTCAtMTU1LjQwMjQsMjAuMDc1NTQwOTk5OTk5OTk4IEwgLTE1NS4zODc1NzgsMjAuMDY3MTE4OTk5OTk5OTk4IEwgLTE1NS4zMzAyMSwyMC4wMzg1MTcgTCAtMTU1LjI5NTQ4LDIwLjAyNDQzOCBMIC0xNTUuMjgyNjI5LDIwLjAyMTk2OSBMIC0xNTUuMjcwMzE1OTk5OTk5OTgsMjAuMDE0NTI1IEwgLTE1NS4yNDA5MzI5OTk5OTk5OCwxOS45OTAxNzMgTCAtMTU1LjIwNDQ4NiwxOS45Njk0MzggTCAtMTU1LjE5NDU5MywxOS45NTgzNjggTCAtMTU1LjE3OTkzOSwxOS45NDkzNzIgTCAtMTU1LjE0OTIxNSwxOS45MjI4NzE5OTk5OTk5OTggTCAtMTU1LjE0NDM5NCwxOS45MjA1MjMgTCAtMTU1LjEzMTIzNSwxOS45MDY4MDA5OTk5OTk5OTggTCAtMTU1LjEyNDYxOCwxOS44OTcyODggTCAtMTU1LjEyMTc1LDE5Ljg4NjA5ODk5OTk5OTk5OCBMIC0xNTUuMTA3NTQxLDE5Ljg3MjQ2NyBMIC0xNTUuMDk4NzE2LDE5Ljg2NzgxMSBMIC0xNTUuMDk1MDMyLDE5Ljg2Nzg4MTk5OTk5OTk5OCBMIC0xNTUuMDg2MzQxLDE5Ljg1NTM5OSBMIC0xNTUuMDg0MzU3LDE5Ljg0OTczNiBMIC0xNTUuMDg1NjczOTk5OTk5OTgsMTkuODM4NTgzOTk5OTk5OTk3IEwgLTE1NS4wODg5NzksMTkuODI2NjU2IEwgLTE1NS4wOTQ0MTQsMTkuODE0OTA5OTk5OTk5OTk4IEwgLTE1NS4wOTIwNywxOS43OTk0MDkgTCAtMTU1LjA5MTIxNiwxOS43NzYzNjc5OTk5OTk5OTggTCAtMTU1LjA5MzUxNywxOS43NzE4MzIgTCAtMTU1LjA5MzM4NywxOS43Mzc3NTEgTCAtMTU1LjA4NzExOCwxOS43MjgwMTMgTCAtMTU1LjA3OTQyNiwxOS43MjYxOTMgTCAtMTU1LjA2Mzk3MiwxOS43Mjg5MTcgTCAtMTU1LjA0NTM4MiwxOS43Mzk4MjQgTCAtMTU1LjAwNjQyMjk5OTk5OTk4LDE5LjczOTI4NiBMIC0xNTQuOTk3Mjc4LDE5LjcyODU3OTk5OTk5OTk5NyBMIC0xNTQuOTg3MTY4LDE5LjcwODUyNCBMIC0xNTQuOTgxMTAyLDE5LjY5MDY4NyBMIC0xNTQuOTg0NzE4LDE5LjY3MjE2MSBMIC0xNTQuOTgzNzc4LDE5LjY0MTY0NyBMIC0xNTQuOTc0MzQyLDE5LjYzMzIwMSBMIC0xNTQuOTYzOTMzLDE5LjYyNzYwNSBMIC0xNTQuOTUwMzU5LDE5LjYyNjQ2MSBMIC0xNTQuOTQ3ODc0LDE5LjYyNDI1IEwgLTE1NC45NDc3MTgsMTkuNjIxOTQ3IEwgLTE1NC45NTEwMTQsMTkuNjEzNjE0IEwgLTE1NC45NDcxMDYsMTkuNjA0ODU1OTk5OTk5OTk4IEwgLTE1NC45MzM5NCwxOS41OTc1MDQ5OTk5OTk5OTggTCAtMTU0LjkyODIwNSwxOS41OTI3MDIgTCAtMTU0LjkyNDQyMiwxOS41ODY1NTMgTCAtMTU0LjkwMzU0MiwxOS41NzA2MjIgTCAtMTU0Ljg3NSwxOS41NTY3OTcgTCAtMTU0Ljg1MjYxOCwxOS41NDkxNzIgTCAtMTU0LjgzNzM4NCwxOS41MzgzNTM5OTk5OTk5OTggTCAtMTU0LjgyNjczMiwxOS41Mzc2MjYgTCAtMTU0LjgxNDQxNywxOS41MzAwODk5OTk5OTk5OTggTCAtMTU0LjgwOTU2MSwxOS41MjIzNzcgTCAtMTU0LjgwOTM3OSwxOS41MTkwODU5OTk5OTk5OTggTCAtMTU0LjgyMjk2OCwxOS40ODEyODk5OTk5OTk5OTggTCAtMTU0LjgzODU0NSwxOS40NjM2NDIgTCAtMTU0Ljg2ODU0LDE5LjQzODEyNiBMIC0xNTQuODg3ODE2OTk5OTk5OTgsMTkuNDI2NDI1IEwgLTE1NC45Mjg3NzE5OTk5OTk5OCwxOS4zOTc2NDU5OTk5OTk5OTggTCAtMTU0Ljk0NDE4NSwxOS4zODE4NTIgTCAtMTU0Ljk2NDYxOSwxOS4zNjU2NDU5OTk5OTk5OTggTCAtMTU0Ljk4MDg2MSwxOS4zNDkyOTA5OTk5OTk5OTcgTCAtMTU1LjAyMDUzNywxOS4zMzEzMTcgTCAtMTU1LjA2MTcyOSwxOS4zMTY2MzYgTCAtMTU1LjExMzI3MiwxOS4yOTA2MTMgTCAtMTU1LjEzMzcsMTkuMjc2MDk5IEwgLTE1NS4xNTk2MzQ5OTk5OTk5OCwxOS4yNjgzNzUgTCAtMTU1LjE3MjQxMywxOS4yNjkwNiBMIC0xNTUuMTg3NDI3LDE5LjI2NjE1NiBMIC0xNTUuMTk2MjYsMTkuMjYxMjk1IEwgLTE1NS4yMDU4OTIsMTkuMjYwOTA3IEwgLTE1NS4yNDM5NjEsMTkuMjcxMzEzIEwgLTE1NS4yNjQ2MTg5OTk5OTk5OCwxOS4yNzQyMTMgTCAtMTU1LjI5Njc2MSwxOS4yNjYyODkgTCAtMTU1LjMwMzgwOCwxOS4yNjE4MzQ5OTk5OTk5OTggTCAtMTU1LjMxMzM3LDE5LjI1MDY5OCBMIC0xNTUuMzQxMjY4LDE5LjIzNDAzOSBMIC0xNTUuMzQ5MTQ4LDE5LjIxNzc1NTk5OTk5OTk5OCBMIC0xNTUuMzYwNjMxLDE5LjIwODkzIEwgLTE1NS4zNzg2MzgsMTkuMjAyNDM0OTk5OTk5OTk4IEwgLTE1NS4zOTA3MDEsMTkuMjAxMTcxIEwgLTE1NS40MTczNjksMTkuMTg3ODU4IEwgLTE1NS40MjcwOTMsMTkuMTc5NTQ2IEwgLTE1NS40MzI1MTksMTkuMTcwNjIzIEwgLTE1NS40NTM1MTYsMTkuMTUxOTUxOTk5OTk5OTk4IEwgLTE1NS40NjU2NjMsMTkuMTQ2OTY0IEwgLTE1NS41MDUyODEsMTkuMTM3OTA4IEwgLTE1NS41MTQ3NCwxOS4xMzI1MDA5OTk5OTk5OTggTCAtMTU1LjUxMjE0LDE5LjEyODE3Mzk5OTk5OTk5OCBMIC0xNTUuNTEyMTM3LDE5LjEyNDI5NTk5OTk5OTk5OCBMIC0xNTUuNTE5NjUyLDE5LjExNzAyNDk5OTk5OTk5OCBMIC0xNTUuNTI2MTM2LDE5LjExNTg4OSBMIC0xNTUuNTI4OTAyLDE5LjExMzcwOTk5OTk5OTk5OCBMIC0xNTUuNTQ0ODA2LDE5LjA5MTA1ODk5OTk5OTk5OCBMIC0xNTUuNTUxMTI5LDE5LjA4ODc4IEwgLTE1NS41NTc4MTcsMTkuMDgyMTMgTCAtMTU1LjU1NTMyNiwxOS4wNjkzNzcgTCAtMTU1LjU1NTE3NzAwMDAwMDAxLDE5LjA1MzkzMiBMIC0xNTUuNTU3MzcxLDE5LjA0NjU2NDk5OTk5OTk5OCBMIC0xNTUuNTY2NDQ1OTk5OTk5OTgsMTkuMDMyNTMxIEwgLTE1NS41NzY1OTksMTkuMDI3NDExOTk5OTk5OTk4IEwgLTE1NS41ODE5MDMsMTkuMDIyMjQgTCAtMTU1LjU5NjAzMiwxOC45OTg4MzI5OTk5OTk5OTggTCAtMTU1LjU5NjUyMSwxOC45ODA2NTM5OTk5OTk5OTggTCAtMTU1LjYwMTg2NiwxOC45NzE1NzIgTCAtMTU1LjYxMzk2NiwxOC45NzAzOTkgTCAtMTU1LjYyNTI1NiwxOC45NjE5NTEgTCAtMTU1LjYyNSwxOC45NTk5MzQgTCAtMTU1LjYzODA1NCwxOC45NDE3MjMgTCAtMTU1LjY1ODQ4NTk5OTk5OTk4LDE4LjkyNDgzNDk5OTk5OTk5OCBMIC0xNTUuNjcyMDA1MzQ3MDYsMTguOTE3NDY2MTM3MjIxNzk4IEwgLTE1NS42ODE4MjQ4MTA5NTUwMiwxOC45MTg2OTM1NzEzOTgwMDIgTCAtMTU1LjY4NzcxNjQ5MTE5NSwxOC45MjMzNTc4MTc0NjIgTCAtMTU1LjY5MDE3MTM1NDc5MSwxOC45MzIxOTUzMjgzMDc5MDIgTCAtMTU1LjY5MzExNzE5NDkxMTAzLDE4Ljk0MDU0MTg4NjQxNDkgTCAtMTU1LjcyNjA0MywxOC45Njk0MzcgTCAtMTU1Ljc2MzU5OCwxOC45ODE4MzcgTCAtMTU1LjgwNjEwOSwxOS4wMTM5NjY5OTk5OTk5OTcgTCAtMTU1Ljg1Mzk0MzAwMDAwMDAyLDE5LjAyMzc2MTk5OTk5OTk5OCBMIC0xNTUuODgxNTUsMTkuMDM2NjQ0IEwgLTE1NS44ODQwNzcsMTkuMDM5MjY1OTk5OTk5OTk4IEwgLTE1NS44ODYyNzgsMTkuMDU1NzYgTCAtMTU1LjkwMzY5MywxOS4wODA3NzY5OTk5OTk5OTggTCAtMTU1LjkwODM1NSwxOS4wODExMzggTCAtMTU1LjkyMTM4OSwxOS4xMjExODMgTCAtMTU1LjkxNzI5MiwxOS4xNTU5NjMgTCAtMTU1LjkwMzMzOSwxOS4yMTc3OTIgTCAtMTU1LjkwNDkxLDE5LjIzMDE0NyBMIC0xNTUuOTAyNTY0OTk5OTk5OTgsMTkuMjU4NDI2OTk5OTk5OTk4IEwgLTE1NS44OTU0MzUsMTkuMjc0NjM5IEwgLTE1NS44OTA4NDIsMTkuMjk4OTA0OTk5OTk5OTk4IEwgLTE1NS44ODczNTYsMTkuMzM3MTAxIEwgLTE1NS44ODg3MDEsMTkuMzQ4MDMxIEwgLTE1NS44OTg3OTIwMDAwMDAwMSwxOS4zNzc5ODM5OTk5OTk5OTggTCAtMTU1LjkxMzg0OSwxOS40MDExMDcgTCAtMTU1LjkwOTA4NywxOS40MTU0NTQ5OTk5OTk5OTggTCAtMTU1LjkyMTcwNywxOS40MzA1NSBMIC0xNTUuOTI0MjY4OTk5OTk5OTgsMTkuNDM4NzkzOTk5OTk5OTk4IEwgLTE1NS45MjUxNjYsMTkuNDY4MDgwOTk5OTk5OTk4IEwgLTE1NS45MjI2MDksMTkuNDc4NjExIEwgLTE1NS45MjQxMjQsMTkuNDgxNDA2IEwgLTE1NS45MzA1MjMsMTkuNDg0OTIxIEwgLTE1NS45MzU2NDEsMTkuNDg1NjI4IEwgLTE1NS45MzY0MDI5OTk5OTk5OCwxOS40ODE5MDQ5OTk5OTk5OTggTCAtMTU1LjkzOTE0NSwxOS40ODE1NzY5OTk5OTk5OTggTCAtMTU1Ljk1MTQ5LDE5LjQ4NjY0OSBMIC0xNTUuOTUyODk3LDE5LjQ4ODgwNSBMIC0xNTUuOTUzNjYzLDE5LjUxMDAwMjk5OTk5OTk5OCBMIC0xNTUuOTYwNDU3LDE5LjU0NjYxMiBMIC0xNTUuOTYyMjY0LDE5LjU1MTc3OSBMIC0xNTUuOTY1MjExLDE5LjU1NDc0NSBMIC0xNTUuOTY5MzUsMTkuNTU1OTYzIEwgLTE1NS45NzA5NjksMTkuNTg2MzI3OTk5OTk5OTk4IEwgLTE1NS45NzgyMDYsMTkuNjA4MTU5IEwgLTE1NS45OTc3MjgsMTkuNjQyODE2IEwgLTE1Ni4wMjg5ODE5OTk5OTk5OCwxOS42NTAwOTggTCAtMTU2LjAzMjkyOCwxOS42NTM5MDQ5OTk5OTk5OTggTCAtMTU2LjAzNDk5Mzk5OTk5OTk4LDE5LjY1OTM2IEwgLTE1Ni4wMzMzMjYsMTkuNjY5MjMgTCAtMTU2LjAyNzQyNywxOS42NzIxNTQgTCAtMTU2LjAyOTI4MSwxOS42Nzg5MDggTCAtMTU2LjAzNjA3OSwxOS42OTAyNTE5OTk5OTk5OTcgTCAtMTU2LjA0Nzk2LDE5LjY5ODkzOCBMIC0xNTYuMDUxNjUyLDE5LjcwMzY0OSBMIC0xNTYuMDUyNDg1LDE5LjcxODY2NyBMIC0xNTYuMDY0MzY0LDE5LjczMDc2NiBMIC0xNTYuMDU3MjIsMTkuNzQyNTM1OTk5OTk5OTk4IEwgLTE1Ni4wNTIzMTUsMTkuNzU2ODM2IEwgLTE1Ni4wNDk2NTA5OTk5OTk5OCwxOS43ODA0NTIgTCAtMTU2LjAyMTczMiwxOS44MDIyMDAwMDAwMDAwMDMgTCAtMTU2LjAwNjI2Njk5OTk5OTk4LDE5LjgxNzU4IEwgLTE1NS45ODI4MjEsMTkuODQ1NjUxIEwgLTE1NS45NzY2NTEsMTkuODUwNTMgTCAtMTU1Ljk2NDgxNjk5OTk5OTk4LDE5Ljg1NTE4MyBMIC0xNTUuOTQ5MjUxLDE5Ljg1NzAzNCBMIC0xNTUuOTQ1Mjk2OTk5OTk5OTgsMTkuODUzNDQzIEwgLTE1NS45NDAzMTEsMTkuODUyMzA0OTk5OTk5OTk4IEwgLTE1NS45MjU4NDMsMTkuODU4OTI4IEwgLTE1NS45MjY5MzgsMTkuODcwMjIxIEwgLTE1NS45MjU0OSwxOS44NzUgTCAtMTU1LjkxNTY2MiwxOS44ODcxMjYgTCAtMTU1LjkwMTk4NywxOS45MTIwODEgTCAtMTU1Ljg5NDA5ODk5OTk5OTk4LDE5LjkyMzEzNSBMIC0xNTUuODk0NDc0LDE5LjkyNjkyNyBMIC0xNTUuODkyNTMzMDAwMDAwMDEsMTkuOTMyMTYxOTk5OTk5OTk4IEwgLTE1NS44NjY5MTksMTkuOTU0MTcyIEwgLTE1NS44NTY1ODgsMTkuOTY4ODg1IEwgLTE1NS44NDA3MDgsMTkuOTc2OTUyIEwgLTE1NS44Mzg2OTE5OTk5OTk5OCwxOS45NzU1MjcgTCAtMTU1LjgzNTMxMiwxOS45NzYwNzc5OTk5OTk5OTggTCAtMTU1LjgzMTk0OCwxOS45ODI3NzUgTCAtMTU1LjgyODk2NDk5OTk5OTk4LDE5Ljk5NTU0MiBMIC0xNTUuODI1NDczLDIwLjAyNTk0NCBMIC0xNTUuODI4MTgyLDIwLjAzNTQyNCBMIC0xNTUuODUwMzg1LDIwLjA2MjUwNiBMIC0xNTUuODY2OTMxLDIwLjA3ODY1MTk5OTk5OTk5OCBMIC0xNTUuODg0MTksMjAuMTA2NzQ5OTk5OTk5OTk4IEwgLTE1NS44OTkxNDksMjAuMTQ1NzI4IEwgLTE1NS45MDYwMzUsMjAuMjA1MTU3IEwgLTE1NS45MDE0NTIsMjAuMjM1Nzg3IEwgLTE1NS44OTA2NjMsMjAuMjU1MjQgTCAtMTU1Ljg4MjYzMSwyMC4yNjMwMjYgTCAtMTU1Ljg3MzkyMSwyMC4yNjc3NDQgTCAtMTU1Ljg1MzI5MywyMC4yNzE1NDggTCAtMTU1LjgxMTQ1OSwyMC4yNjAzMiBMIC0xNTUuNzgzMjQyLDIwLjI0NjM5NSBMIC0xNTUuNzc4MjM0LDIwLjI0NTc0Mjk5OTk5OTk5NyB6IiAvPjwvZz48L3N2Zz4="/>
 </div>
@@ -7752,7 +7867,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">MP</span><span class="o">.</span><span class="n">geoms</span>
@@ -7766,9 +7881,9 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>&lt;shapely.geometry.base.GeometrySequence at 0x10d4e1f90&gt;</pre>
+<pre>&lt;shapely.geometry.base.GeometrySequence at 0x110c39d10&gt;</pre>
 </div>
 </div>
 </div>
@@ -7778,7 +7893,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">islands_mp</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">MP</span><span class="o">.</span><span class="n">geoms</span><span class="p">)</span>
@@ -7793,7 +7908,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>9</pre>
 </div>
@@ -7805,7 +7920,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">islands_mp</span>
@@ -7819,7 +7934,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>[&lt;POLYGON ((-155.778 20.246, -155.773 20.245, -155.747 20.232, -155.737 20.22...&gt;,
  &lt;POLYGON ((-157.79 21.438, -157.79 21.438, -157.789 21.436, -157.791 21.434,...&gt;,
@@ -7851,7 +7966,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Hawaii"</span><span class="p">:[</span><span class="o">-</span><span class="mf">155.519783</span><span class="p">,</span><span class="mf">19.625055</span><span class="p">],</span> 
@@ -7873,7 +7988,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">shapely</span><span class="w"> </span><span class="kn">import</span> <span class="n">Point</span>
@@ -7929,7 +8044,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">gs</span> <span class="o">=</span> <span class="n">hawaii</span><span class="o">.</span><span class="n">geometry</span>  <span class="c1"># gs is a GeoSeries</span>
@@ -7965,7 +8080,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -8006,7 +8121,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">crs</span> <span class="o">=</span> <span class="n">islands_gs</span><span class="o">.</span><span class="n">estimate_utm_crs</span><span class="p">()</span>
@@ -8022,7 +8137,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>11  0    1.046297e+10
     1    1.281197e+05
@@ -8077,7 +8192,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">rL</span><span class="p">]</span>
@@ -8094,7 +8209,7 @@ dtype: float64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>['Hawaii',
  'Ford Island',
@@ -8114,7 +8229,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pg</span> <span class="o">=</span> <span class="n">islands_gs</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -8130,10 +8245,10 @@ dtype: float64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>(&lt;matplotlib.patches.PathPatch at 0x10d6add10&gt;,
- &lt;matplotlib.lines.Line2D at 0x10d6adf90&gt;)</pre>
+<pre>(&lt;matplotlib.patches.PathPatch at 0x110e81d10&gt;,
+ &lt;matplotlib.lines.Line2D at 0x110e81f90&gt;)</pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -8149,7 +8264,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pg</span> <span class="o">=</span> <span class="n">islands_gs</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
@@ -8165,10 +8280,10 @@ dtype: float64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[20]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>(&lt;matplotlib.patches.PathPatch at 0x10d71e5d0&gt;,
- &lt;matplotlib.lines.Line2D at 0x10d71e710&gt;)</pre>
+<pre>(&lt;matplotlib.patches.PathPatch at 0x110eea5d0&gt;,
+ &lt;matplotlib.lines.Line2D at 0x110eea710&gt;)</pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -8197,7 +8312,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
@@ -8221,7 +8336,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -8263,7 +8378,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">islands_gs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'Set2'</span><span class="p">)</span>
@@ -8301,7 +8416,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">maui</span> <span class="o">=</span> <span class="n">islands_gs</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
@@ -8316,7 +8431,7 @@ dtype: float64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[22]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
 <div class="jp-RenderedSVG jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="image/svg+xml" tabindex="0">
 <img alt="No description has been provided for this image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTAwLjAiIGhlaWdodD0iMTAwLjAiIHZpZXdCb3g9Ii0xNTYuNzI4NTAyMTE5OTk5OTcgMjAuNTQ5ODE0ODggMC43NzI1MjcyMzk5OTk5NTk2IDAuNTEzMTY4MjM5OTk5OTk4OCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pbllNaW4gbWVldCI+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMCw0MS42MTI3OTgpIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiM2NmNjOTkiIHN0cm9rZT0iIzU1NTU1NSIgc3Ryb2tlLXdpZHRoPSIwLjAxNTQ1MDU0NDc5OTk5OTE5NCIgb3BhY2l0eT0iMC42IiBkPSJNIC0xNTYuNjEyMDEyLDIxLjAyNDc3IEwgLTE1Ni42MTIwNjUsMjEuMDI3MjcyOTk5OTk5OTk3IEwgLTE1Ni42MDYyMzgsMjEuMDM0MzcxIEwgLTE1Ni41OTIyNTYsMjEuMDMyODggTCAtMTU2LjU4MDQ0OCwyMS4wMjAxNzIgTCAtMTU2LjU2Mjc3MywyMS4wMTYxNjcgTCAtMTU2LjU0OTgxMywyMS4wMDQ5MzkgTCAtMTU2LjU0NjI5MSwyMS4wMDUwODE5OTk5OTk5OTggTCAtMTU2LjUyODI0NiwyMC45Njc3NTcgTCAtMTU2LjUxODcwNywyMC45NTQ2NjIgTCAtMTU2LjUxMjIyNiwyMC45NTEyOCBMIC0xNTYuNTEwMzkxLDIwLjk0MDM1OCBMIC0xNTYuNTA3OTEzLDIwLjkzNzg4NiBMIC0xNTYuNDk5NDgsMjAuOTM0NTc2OTk5OTk5OTk3IEwgLTE1Ni40OTU4ODMsMjAuOTI4MDA1IEwgLTE1Ni40OTMyNjMsMjAuOTE2MDEwOTk5OTk5OTk3IEwgLTE1Ni40ODEwNTUsMjAuODk4MTk4OTk5OTk5OTk4IEwgLTE1Ni40NzQ3OTYsMjAuODk0NTQ2IEwgLTE1Ni40MjI2NjgsMjAuOTExNjMxIEwgLTE1Ni4zODYwNDUsMjAuOTE5NTYzIEwgLTE1Ni4zNzQyOTcsMjAuOTI3NjE2IEwgLTE1Ni4zNzA3Mjg5OTk5OTk5OCwyMC45MzI2NjkgTCAtMTU2LjM1MjY0ODk5OTk5OTk5LDIwLjk0MTQxMzk5OTk5OTk5OCBMIC0xNTYuMzQ1NjU1LDIwLjk0MTU5NiBMIC0xNTYuMzQyMzY1LDIwLjkzODczNyBMIC0xNTYuMzMyODE3LDIwLjk0NjQ1IEwgLTE1Ni4zMjQ1NzgsMjAuOTUwMTg0IEwgLTE1Ni4zMDcxOTgsMjAuOTQyNzM5IEwgLTE1Ni4yODYzMzIsMjAuOTQ3NzAxIEwgLTE1Ni4yNzUxMTYsMjAuOTM3MzYxIEwgLTE1Ni4yNjMxMDcsMjAuOTQwODg3OTk5OTk5OTk4IEwgLTE1Ni4yNDI1NTQ5OTk5OTk5OCwyMC45Mzc4MzggTCAtMTU2LjIzMDE1OTAwMDAwMDAxLDIwLjkzMTkzNiBMIC0xNTYuMjMwMDg5LDIwLjkxNzg2Mzk5OTk5OTk5OCBMIC0xNTYuMjI2NzU3LDIwLjkxNjY3NyBMIC0xNTYuMjIyMDYyLDIwLjkxODMwOSBMIC0xNTYuMjE3OTUzLDIwLjkxNjU3MyBMIC0xNTYuMjE2MzQxLDIwLjkwNzAzNSBMIC0xNTYuMTczMTAzLDIwLjg3NjkyNTk5OTk5OTk5NyBMIC0xNTYuMTcwNDU4LDIwLjg3NDYwNSBMIC0xNTYuMTY2NzQ2LDIwLjg2NTY0NTk5OTk5OTk5OCBMIC0xNTYuMTMyNjY5LDIwLjg2MTM2OSBMIC0xNTYuMTI5MzgxLDIwLjg0NzUxMyBMIC0xNTYuMTE1NzM1LDIwLjgyNzMwMSBMIC0xNTYuMTAwMTIzLDIwLjgyODUwMiBMIC0xNTYuMDkwMjkxLDIwLjgzMTg3MiBMIC0xNTYuMDU5Nzg4LDIwLjgxMDU0IEwgLTE1Ni4wMzMyODcsMjAuODA4MjQ2IEwgLTE1Ni4wMDM1MzIsMjAuNzk1NTQ1IEwgLTE1Ni4wMDI5NDcsMjAuNzg5NDE3OTk5OTk5OTk4IEwgLTE1NS45ODc5NDQsMjAuNzc2NTUyIEwgLTE1NS45ODQ1ODcsMjAuNzY3NDk1OTk5OTk5OTk4IEwgLTE1NS45ODY4NTEsMjAuNzU4NTc3IEwgLTE1NS45ODU0MTMsMjAuNzQ0MjQ1IEwgLTE1NS45ODcyMTYsMjAuNzIyNzE3IEwgLTE1NS45OTE1MzQsMjAuNzEzNjU0IEwgLTE1Ni4wMDE4NywyMC42OTgwNjQgTCAtMTU2LjAxNDE1LDIwLjY4NTY4MSBMIC0xNTYuMDIwMDQzOTk5OTk5OTgsMjAuNjg2ODU3IEwgLTE1Ni4wMzA3MDIsMjAuNjgyNDUxOTk5OTk5OTk4IEwgLTE1Ni4wNDAzNDEsMjAuNjcyNzE5IEwgLTE1Ni4wNDM3ODYsMjAuNjY0OTAxOTk5OTk5OTk4IEwgLTE1Ni4wNTMzODUsMjAuNjU0MzIgTCAtMTU2LjA1OTc1MywyMC42NTIwNDQgTCAtMTU2LjA4MTQ3MiwyMC42NTQzODcgTCAtMTU2LjA4OTM2NSwyMC42NDg1MTkgTCAtMTU2LjEyMDk4NSwyMC42MzM2ODUgTCAtMTU2LjEyOTg5OCwyMC42Mjc1MjMgTCAtMTU2LjE0MjY2NSwyMC42MjM2MDQ5OTk5OTk5OTggTCAtMTU2LjE0NDU4OCwyMC42MjQwMzIgTCAtMTU2LjE0ODA4NDk5OTk5OTk4LDIwLjYyOTA2NyBMIC0xNTYuMTU2NzcyLDIwLjYyOTYzODk5OTk5OTk5NyBMIC0xNTYuMTY5NzMyLDIwLjYyNzM1Nzk5OTk5OTk5NyBMIC0xNTYuMTczMzkzLDIwLjYyNDEwMDAwMDAwMDAwMiBMIC0xNTYuMTg0NTU2LDIwLjYyOTcxODk5OTk5OTk5OCBMIC0xNTYuMTkyOTM4LDIwLjYzMTc2OSBMIC0xNTYuMjEwMjU4LDIwLjYyODUxOCBMIC0xNTYuMjI1MzM4LDIwLjYyMjk0IEwgLTE1Ni4yMzYxNDUsMjAuNjE1OTQ5OTk5OTk5OTk4IEwgLTE1Ni4yNjU5MjEsMjAuNjAxNjI5IEwgLTE1Ni4yODQzOTEsMjAuNTk2NDg4IEwgLTE1Ni4yODgwMzcsMjAuNTkyMDI5OTk5OTk5OTk4IEwgLTE1Ni4yOTM0NTQsMjAuNTg4NzgzIEwgLTE1Ni4zMDI2OTIsMjAuNTg2MTk5IEwgLTE1Ni4zMjI5NDQsMjAuNTg4MjcyOTk5OTk5OTk3IEwgLTE1Ni4zNTE3MTYsMjAuNTg2OTY5OTk5OTk5OTk3IEwgLTE1Ni4zNTk2MzQsMjAuNTgxOTc3IEwgLTE1Ni4zNzA3MjUsMjAuNTc4NzYgTCAtMTU2LjM3NzYzMywyMC41Nzg0MjY5OTk5OTk5OTggTCAtMTU2LjQxNTMxMywyMC41ODYwOTkgTCAtMTU2LjQxNzUyMywyMC41ODk3Mjc5OTk5OTk5OTcgTCAtMTU2LjQxNTc0NiwyMC41OTQwNDQgTCAtMTU2LjQxNzc5OSwyMC41OTg2ODIgTCAtMTU2LjQyMzE0MSwyMC42MDIwNzkgTCAtMTU2LjQyNzcwOCwyMC41OTg4NzI5OTk5OTk5OTggTCAtMTU2LjQzMTg3MiwyMC41OTgxNDMgTCAtMTU2LjQzODM4NDk5OTk5OTk4LDIwLjYwMTMzNjk5OTk5OTk5NyBMIC0xNTYuNDQ0MjQyLDIwLjYwNzk0MSBMIC0xNTYuNDQyODg0LDIwLjYxMzg0MTk5OTk5OTk5OCBMIC0xNTYuNDUwNjUxLDIwLjY0MjIxMiBMIC0xNTYuNDQ1ODk0LDIwLjY0OTI2OTk5OTk5OTk5OCBMIC0xNTYuNDQzNjczLDIwLjY1NjAxOCBMIC0xNTYuNDQ4NjU2LDIwLjcwNDczOSBMIC0xNTYuNDUxMDM3OTk5OTk5OTgsMjAuNzI1NDY5IEwgLTE1Ni40NTI4OTUsMjAuNzMxMjg3IEwgLTE1Ni40NTg0MzgsMjAuNzM2Njc2IEwgLTE1Ni40NjIyNDIsMjAuNzUzOTUxOTk5OTk5OTk4IEwgLTE1Ni40NjIwNTgsMjAuNzcyNTcxIEwgLTE1Ni40NjQwNDMsMjAuNzgxNjY3IEwgLTE1Ni40NzM1NjIsMjAuNzkwNzU2IEwgLTE1Ni40ODk0OTYsMjAuNzk4MzM5IEwgLTE1Ni41MDE2ODgsMjAuNzk5OTMzIEwgLTE1Ni41MDYwMjYsMjAuNzk5NDYzIEwgLTE1Ni41MTU5OTQsMjAuNzk0MjM0IEwgLTE1Ni41MjUyMTUsMjAuNzgwODIxIEwgLTE1Ni41Mzc3NTIsMjAuNzc4NDA4IEwgLTE1Ni42MzE3OTQsMjAuODIxMjQgTCAtMTU2LjY3ODYzNCwyMC44NzA1NDEgTCAtMTU2LjY4ODk2OSwyMC44ODg2NzMgTCAtMTU2LjY4NzgwNCwyMC44OTA3MTk5OTk5OTk5OTggTCAtMTU2LjY4ODEzMiwyMC45MDYzMjUgTCAtMTU2LjY5MTMzMzk5OTk5OTk4LDIwLjkxMjQ0IEwgLTE1Ni42OTc0MTgsMjAuOTE2MzY4IEwgLTE1Ni42OTk4ODk5OTk5OTk5OCwyMC45MjA2Mjg5OTk5OTk5OTggTCAtMTU2LjY5NDExLDIwLjk1MjcwNzk5OTk5OTk5OCBMIC0xNTYuNjgwOTA1LDIwLjk4MDI2MiBMIC0xNTYuNjY1NTE0LDIxLjAwNzA1NCBMIC0xNTYuNjUyNDE5LDIxLjAwODk5Mzk5OTk5OTk5OCBMIC0xNTYuNjQ1OTY2LDIxLjAxNDQxNiBMIC0xNTYuNjQyNTkyLDIxLjAxOTkzNTk5OTk5OTk5OCBMIC0xNTYuNjQ0MTY2OTk5OTk5OTgsMjEuMDIyMzEyIEwgLTE1Ni42NDI4MDksMjEuMDI3NTgzIEwgLTE1Ni42MTk1ODA5OTk5OTk5OCwyMS4wMjc3OTMgTCAtMTU2LjYxMjAxMiwyMS4wMjQ3NyB6IiAvPjwvZz48L3N2Zz4="/>
 </div>
@@ -8328,7 +8443,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">maui</span><span class="p">)</span>
@@ -8342,7 +8457,7 @@ dtype: float64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[25]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>shapely.geometry.polygon.Polygon</pre>
 </div>
@@ -8354,7 +8469,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">maui_gs</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">(</span><span class="n">maui</span><span class="p">)</span>
@@ -8368,7 +8483,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="p">{}</span>
@@ -8384,7 +8499,7 @@ dtype: float64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[25]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[27]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8424,7 +8539,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">maui</span><span class="o">.</span><span class="n">representative_point</span><span class="p">()</span><span class="o">.</span><span class="n">coords</span><span class="p">[:]</span>
@@ -8441,7 +8556,7 @@ dtype: float64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[28]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>float</pre>
 </div>
@@ -8464,7 +8579,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">contextily</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cx</span>
@@ -8497,7 +8612,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">oahu</span> <span class="o">=</span> <span class="n">islands_gs</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
@@ -8545,7 +8660,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">oahu</span><span class="p">)</span>
@@ -8559,7 +8674,7 @@ dtype: float64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[29]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[31]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>shapely.geometry.polygon.Polygon</pre>
 </div>
@@ -8571,7 +8686,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#gdf.cx[xmin:xmax, ymin:ymax]</span>

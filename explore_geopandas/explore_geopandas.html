@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>explore</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>explore_geopandas</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -9007,10 +9007,14 @@ Name: NameEn, dtype: object</pre>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Notes-about-the-Jupyter-notebook.">Notes about the Jupyter notebook.<a class="anchor-link" href="#Notes-about-the-Jupyter-notebook.">¶</a></h3><p>To convert this notebook to html do:</p>
 <p><code>jupyter nbconvert --execute --to html explore.ipynb</code></p>
-<p>One can print directly to a pdf, but I found the font is too big. (This may be because I have the font set large in Safari so I can read it easily). Saving to html and then printing that seems to work OK.  In the github repo, the html looks weird, so I've moved it to a subdirectory.</p>
+<p>One can print directly to a pdf, but I found the font is too big. (This may be because I have the font set large in Safari so I can read it easily).</p>
+<p>Saving to html and then printing that seems to work OK.  In the github repo, the html looks weird, so at first, I moved it to a subdirectory, but that became awkward.</p>
 <p>As the notebook got larger, scrolling to a cell in the middle became impossible.  From the web, the fix was</p>
-<p>“Settings → Settings Editor → Notebook → Windowing mode → none”</p>
+<p>“Settings &gt; Settings Editor &gt; Notebook &gt; Windowing mode &gt; none”</p>
 <p>which solved the problem.</p>
+<p>Another issue I ran into was that sometimes a Notebook would change such that the menu bar File/Edit ... was obscured by the window below it.</p>
+<p>This is a zoom problem, caused by a decrease in the zoom.  Sometimes CMD+ will fix it, and sometimes not.  It will not be reset by rebooting the notebook.</p>
+<p>The solution I found is to go to the real Safari menu bar and do Safari &gt; settings for localhost ... &gt; and then reset the zoom to 100%.</p>
 </div>
 </div>
 </div>

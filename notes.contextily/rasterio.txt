@@ -58,7 +58,9 @@ which indicates it is implemented
 ---------
 
 one can explicitly download tiles to local files
+
 https://contextily.readthedocs.io/en/latest/working_with_local_files.html
+
 
 import matplotlib.pyplot as plt
 import contextily as cx
